@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Group8Project2" id="BE74B35C-3B88-1BF1-B4E6-4ACC4FCFD741" version="3.5">
-<createdBy>kitty</createdBy>
-<createdTime>2023-02-27 20:16:23 UTC</createdTime>
-<ownerDesignName>Group8Project</ownerDesignName>
-<capitalNames>false</capitalNames>
-<designId>BE74B35C-3B88-1BF1-B4E6-4ACC4FCFD741</designId>
-</OSDM_Design>
