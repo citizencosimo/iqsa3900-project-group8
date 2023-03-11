@@ -10,8 +10,9 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
     list_display = ["email", "first_name", "last_name", "username",]
     fieldsets = (
-        (('User'),{'fields': ('email', 'first_name', 'last_name')}),
-        (('Flags'),{'fields': ('is_superuser', 'is_staff', 'is_active')})
+        (('User'),{'fields': ('email', 'first_name', 'last_name', 'password')}),
+        (('Flags'),{'fields': ('is_superuser', 'is_staff', 'is_active')}),
+        (('Groups'),{'fields': ['groups']})
     )
 
 admin.site.register(CustomUser, CustomUserAdmin)
