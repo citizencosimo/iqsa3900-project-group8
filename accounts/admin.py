@@ -12,6 +12,7 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (('User'),{'fields': ('email', 'first_name', 'last_name', 'password')}),
         (('Flags'),{'fields': ('is_superuser', 'is_staff', 'is_active')}),
+        (('Moderation'),{'fields': ('is_onprobation', 'moderation_message')}),
         (('Groups'),{'fields': ['groups']})
     )
 
