@@ -15,3 +15,9 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 # Create your models here.
+class Publisher(models.model):
+    publisher_id = models.IntegerField(max_length=8, primary_key=True)
+    publisher_name = models.CharField(max_length=1000)
+    publisher_image = models.ImageField(upload_to='images/', null=True, blank=True)
+    publisher_country = models.CharField(max_length=500)
+    publisher_description = models.CharField(max_length=1000)
