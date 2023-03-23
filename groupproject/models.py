@@ -3,8 +3,14 @@ import uuid
 from accounts import models
 from django.db import models
 
+class Language(models.Model):
+    language_name = models.CharField(max_length=25, default="Unknown")
+    language_charset = models.CharField(max_length=25, default="Unknown", help_text="The alphabet used by the language. Currently unused")
+class Genre(models.Model):
+    genre_name = models.CharField(max_length=200, help_text="The genre(s) of the game.")
+    genre_description = models.CharField(max_length=200, blank="True", null="True")
 
-# Create your models here.
+
 class Platform(models.Model):
     platform_id = models.AutoField(primary_key=True)
     platform_name = models.CharField(max_length=25)
