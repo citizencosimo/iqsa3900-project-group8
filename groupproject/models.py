@@ -1,6 +1,6 @@
 import uuid
 
-from accounts import models
+from accounts.models import CustomUser
 from django.db import models
 
 class Language(models.Model):
@@ -79,12 +79,12 @@ class Game(models.Model):
 
 class Review(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    game = models.ForeignKey('Game')
+    game = models.ForeignKey('Game', on_delete=models.CASCADE)
     comment = models.CharField(max_length=5000, help_text='Type in your review here')
     is_recommended = models.BooleanField(default=False)
     is_flagged = models.BooleanField(default=False)
 
-    user = models.ForeignKey('User', on_delete=models.RESTRICT)
+    user = models.ForeignKey('accounts.CustomUser', on_delete=models.RESTRICT)
 
 
 
