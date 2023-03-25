@@ -5,10 +5,10 @@ from django.db import models
 
 class Language(models.Model):
     name = models.CharField(max_length=25, default="Unknown")
-    charset = models.CharField(max_length=25, default="Unknown", help_text="The alphabet used by the language. Currently unused")
+    charset = models.CharField(max_length=100, default="Unknown", help_text="The alphabet used by the language. Currently unused")
 class Genre(models.Model):
-    name = models.CharField(max_length=200, help_text="The genre(s) of the game.")
-    description = models.CharField(max_length=200, blank="True", null="True")
+    name = models.CharField(max_length=25, help_text="The genre(s) of the game.")
+    description = models.CharField(max_length=500, blank="True", null="True")
 
 class Publisher(models.Model):
     publisher_name = models.CharField(max_length=1000)
@@ -36,7 +36,7 @@ class Platform(models.Model):
 
 
 class Game(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=100)
     release_date = models.DateField(null=True, blank=True)
 
     developer = models.ForeignKey('Developer', on_delete=models.RESTRICT, null=True)
@@ -83,6 +83,7 @@ class Review(models.Model):
     comment = models.CharField(max_length=5000, help_text='Type in your review here')
     is_recommended = models.BooleanField(default=False)
     is_flagged = models.BooleanField(default=False)
+    moderation_message = models.CharField(max_length=100, null=True, blank=True)
 
     user = models.ForeignKey('accounts.CustomUser', on_delete=models.RESTRICT)
 
