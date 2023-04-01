@@ -1,5 +1,5 @@
 from django import forms
-from .models import Publisher, Developer
+from .models import Publisher, Developer, Game
 
 
 class PublisherForm(forms.ModelForm):
@@ -14,3 +14,11 @@ class DeveloperForm(forms.ModelForm):
         model = Developer
         fields = ('developer_name', 'developer_image',
                   'developer_country', 'developer_description')
+
+
+class GameForm(forms.ModelForm):
+
+    class Meta:
+        model = Game
+        fields = ('title', 'release_date', 'developer', 'publisher',
+                  'platform', 'language', 'genre', 'rating', 'description', 'image')
