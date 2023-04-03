@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'groupproject.apps.GroupprojectConfig',
     'accounts',
     'search.apps.SearchConfig',
+
 ]
 
 MIDDLEWARE = [

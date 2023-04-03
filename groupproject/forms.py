@@ -1,16 +1,34 @@
-from django import forms
-from .models import Publisher, Developer
 
+from django.forms import ModelForm
+from .models import Platform, Publisher, Developer, Game, Language, Genre
 
-class PublisherForm(forms.ModelForm):
+class PublisherForm(ModelForm):
     class Meta:
         model = Publisher
-        fields = ('publisher_name', 'publisher_image',
-                  'publisher_country', 'publisher_description')
-
-
-class DeveloperForm(forms.ModelForm):
+        fields = ['publisher_name', 'publisher_country', 'publisher_description', 'publisher_image']
+class DeveloperForm(ModelForm):
     class Meta:
         model = Developer
-        fields = ('developer_name', 'developer_image',
-                  'developer_country', 'developer_description')
+        fields = ['developer_name', 'developer_country', 'developer_description', 'developer_image']
+
+class PlatformForm(ModelForm):
+    class Meta:
+        model = Platform
+        fields = ['platform_name', 'platform_description', 'platform_image']
+
+class GameForm(ModelForm):
+    class Meta:
+        model = Game
+        fields = ['title', 'publisher', 'developer', 'release_date', 'platform',
+                  'rating', 'genre', 'language', 'image']
+
+class LanguageForm(ModelForm):
+    class Meta:
+        model=Language
+        fields='__all__'
+
+class GenreForm(ModelForm):
+    class Meta:
+        model=Genre
+        fields='__all__'
+
