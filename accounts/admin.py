@@ -1,9 +1,18 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from groupproject.models import *
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 
+
+admin.site.register(Game)
+admin.site.register(Review)
+admin.site.register(Platform)
+admin.site.register(Developer)
+admin.site.register(Publisher)
+admin.site.register(Language)
+admin.site.register(Genre)
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm

@@ -6,9 +6,15 @@ from django.db import models
 class Language(models.Model):
     name = models.CharField(max_length=25, default="Unknown")
     charset = models.CharField(max_length=100, default="Unknown", help_text="The alphabet used by the language. Currently unused")
+
+    def __str__(self):
+        return self.name
 class Genre(models.Model):
     name = models.CharField(max_length=25, help_text="The genre(s) of the game.")
     description = models.CharField(max_length=500, blank="True", null="True")
+
+    def __str__(self):
+        return self.name
 
 class Publisher(models.Model):
     publisher_name = models.CharField(max_length=1000)
