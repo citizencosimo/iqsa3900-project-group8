@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'groupproject.apps.GroupprojectConfig',
-    'accounts',
+    'accounts'
 ]
 
 MIDDLEWARE = [
