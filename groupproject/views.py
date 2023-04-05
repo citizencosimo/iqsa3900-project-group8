@@ -8,47 +8,75 @@ def ListView(request):
     }
     return render(request, 'data/list.html', context)
 
+
 def CreatePublisher(request):
-    context={}
+    context = {}
     form = PublisherForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
-    context['form']= form
+    context['form'] = form
     return render(request, 'data/forms/publisher_a.html', context)
 
+
 def CreateDeveloper(request):
-    context={}
+    context = {}
     form = DeveloperForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
     context['form'] = form
     return render(request, 'data/forms/add_developer.html', context)
+
+
 def CreatePlatform(request):
-    context={}
+    context = {}
     form = PlatformForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
     context['form'] = form
     return render(request, 'data/forms/add_platform.html.html', context)
+
+
 def CreateGenre(request):
-    context={}
+    context = {}
     form = GenreForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
-    context['form']= form
+    context['form'] = form
     return render(request, 'data/forms/add_genre.html', context)
+
+
 def CreateLanguage(request):
-    context={}
+    context = {}
     form = LanguageForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
-    context['form']= form
+    context['form'] = form
     return render(request, 'data/forms/add_language.html', context)
+
 
 def CreateGame(request):
     context = {}
     form = GameForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
-    context['form'] = form;
+    context['form'] = form
     return render(request, 'data/forms/add_game.html', context)
+
+
+def UpdateGame(request):
+    context = {}
+    form = GameForm(request.PUT or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, 'data/forms/update_game.html', context)
+
+
+def DeleteGame(request):
+    context = {}
+    form = GameForm(request.Delete or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, 'data/forms/delete_game.html', context)
+
