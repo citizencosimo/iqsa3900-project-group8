@@ -14,7 +14,9 @@ def DatabaseLinks(request):
         'site_names': [('games', 'Game List'),
                        ('developers', 'Developer List'),
                        ('publishers', 'Publisher List'),
-                       ('platforms', 'Platform List')]
+                       ('platforms', 'Platform List'),
+                       ('add_language', 'Add Language'),
+                       ('add_genre', 'Add Genre')]
 
     }
     return render(request, 'data/list.html', context)
