@@ -1,4 +1,4 @@
-<!-- templates/base.html -->
+{% comment %} <!-- templates/base.html -->
 <!DOCTYPE html>
 {% load static %}
 <html>
@@ -14,4 +14,82 @@
     {% endblock %}
   </main>
 </body>
-</html>
+</html> {% endcomment %}
+
+<!-- templates/base.html -->
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'base.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" crossorigin="anonymous">
+  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+  <style>
+    html, body {
+      height: 100%;
+    }
+    .page-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .content-wrap {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-container">
+    <!-- Header -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">Games on Review</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% if user.is_authenticated and user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'database_links' %}">Database Tools</a>
+              </li>
+            {% endif %}
+          </ul>
+
+          {% if user.is_authenticated %}
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-user"></i> {{ user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="userDropdown">
+                  <a class="dropdown-item" href="#">Manage Profile</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </div>
+              </li>
+            </ul>
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+
+    <div class="content-wrap">
+      <main class="container my-5">
+        {% block content %}
+        {% endblock %}
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <p>&copy; 2023 Games on Review. All rights reserved.</p>
