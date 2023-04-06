@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{%  block content %}
+{% block title %}View All Games{% endblock %}
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in objects_list %}
+        <tr>
+            <td>{{ game.title }} ({{ game.platform }})</td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{%  endblock %}

@@ -98,7 +98,7 @@ class Game(models.Model):
         ordering = ['title', 'platform', 'release_date']
 
     def __str__(self):
-        return self.title + ' (' + self.platform + ', ' + self.release_date.year + ')'
+        return self.title + ' (' + self.platform.platform_name + ', ' + str(self.release_date.year) + ')'
 
 
 class Review(models.Model):
