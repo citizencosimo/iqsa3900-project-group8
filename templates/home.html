@@ -8,7 +8,6 @@
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
     {% if user.is_staff %}
-        <br>Admin Tool
         <br><a href='{% url 'database_links' %}'>Database Tools</a>
     {% endif %}
   <p><a href="{% url 'logout' %}">Log Out</a></p>
