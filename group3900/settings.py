@@ -148,3 +148,13 @@ LOGOUT_REDIRECT_URL = "home"
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# Password reset via email
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'spring2023webdevcourse'
+EMAIL_HOST_PASSWORD = 'veputcozzyamdvke'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+SERVER_EMAIL = 'root@gmail.com'
+
+
