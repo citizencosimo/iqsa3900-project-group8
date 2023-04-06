@@ -1,3 +1,5 @@
+{% load static %}
+
 <!-- templates/base.html -->
 <!DOCTYPE html>
 <html>
@@ -8,8 +10,13 @@
 </head>
 <body>
   <main class="container my-5">
+    {% if not request.path|slice:'7' == '/search' %}
+        {% include 'search/search_header.html' %}
+    {% endif %}
     {% block content %}
     {% endblock %}
   </main>
+  <script src="{% static 'js/search.js' %}"></script>
+  <script>console.log("HELLO")</script>
 </body>
 </html>
