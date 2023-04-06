@@ -2,11 +2,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('publisher_a', views.CreatePublisher),
-    path('add_game', views.CreateGame),
-    path('add_genre', views.CreateGenre),
-    path('add_language', views.CreateLanguage),
-    path('add_developer', views.CreateDeveloper),
+    path('publisher_a', views.CreatePublisher, name='add_publisher'),
+    path('add_game', views.CreateGame, name='add_game'),
+    path('add_genre', views.CreateGenre, name='add_genre'),
+    path('add_language', views.CreateLanguage, name='add_language'),
+    path('add_developer', views.CreateDeveloper, name='add_developer'),
     path('add_platform', views.CreatePlatform, name='createplatform'),
     path('update_game/<int:pk>', views.UpdateGame, name='update_game'),
     path('delete_game/<int:pk>', views.DeleteGame, name='delete_game'),

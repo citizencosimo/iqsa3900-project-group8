@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {%  block content %}
 {% block title %}View All Developers{% endblock %}
+<a href="{% url 'add_developer' %}">Add a new developer.</a>
 <table>
     <thead>
         <tr>
