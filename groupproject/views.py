@@ -155,3 +155,31 @@ def DeveloperList(request, template_name='data/developer_list.html'):
     data = {}
     data['objects_list'] = developers
     return render(request, template_name, data)
+def ViewPlatform(request, pk, template_name='data/platform/platform.html'):
+    context={}
+    platform=get_object_or_404(Platform, pk=pk)
+    context['platform'] = platform
+    return render(request, template_name, context)
+
+def UpdatePlatform(request, pk, template_name='data/platform/update.html'):
+    context = {}
+    platform = get_object_or_404(Platform, pk=pk)
+    context['developer'] = platform
+    form = PlatformForm(request.POST or None, instance=platform)
+    context['form'] = form
+    if form.is_valid():
+        form.save()
+        return redirect('platform_list')
+    return render(request, template_name, context)
+
+
+def DeletePlatform(request, pk, template_name='data/platform/delete.html'):
+    context={}
+    context['developer'] = get_object_or_404(Developer, pk=pk)
+    return render(request, template_name, context)
+
+def PlatformList(request, template_name='data/platform_list.html'):
+    developers = Developer.objects.all()
+    data = {}
+    data['objects_list'] = developers
+    return render(request, template_name, data)
