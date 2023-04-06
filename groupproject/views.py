@@ -8,9 +8,13 @@ from groupproject.models import Game, Publisher, Developer, Platform, Genre, Lan
 from django.urls import reverse_lazy
 
 
-def ListView(request):
+def DatabaseLinks(request):
     context = {
-        'names': ['game', 'developer', 'publisher', 'platform', 'genre', 'language']
+        'site_names': [('games', 'Game List'),
+                       ('developers', 'Developer List'),
+                       ('publishers', 'Publisher List'),
+                       ('platforms', 'Platform List')]
+
     }
     return render(request, 'data/list.html', context)
 
@@ -68,11 +72,13 @@ def CreateGame(request):
     context['form'] = form
     return render(request, 'data/forms/add_game.html', context)
 
+
 def ViewGame(request, pk, template_name='data/game/game.html'):
-    context={}
-    game=get_object_or_404(Game, pk=pk)
+    context = {}
+    game = get_object_or_404(Game, pk=pk)
     context['game'] = game
     return render(request, template_name, context)
+
 
 def UpdateGame(request, pk, template_name='data/game/update.html'):
     context = {}
@@ -87,9 +93,10 @@ def UpdateGame(request, pk, template_name='data/game/update.html'):
 
 
 def DeleteGame(request, pk, template_name='data/game/delete.html'):
-    context={}
+    context = {}
     context['game'] = get_object_or_404(Game, pk=pk)
     return render(request, template_name, context)
+
 
 def GameList(request, template_name='data/game_list.html'):
     games = Game.objects.all()
@@ -97,17 +104,20 @@ def GameList(request, template_name='data/game_list.html'):
     data['objects_list'] = games
     return render(request, template_name, data)
 
+
 def PublisherList(request, template_name='data/publisher_list.html'):
     publishers = Publisher.objects.all()
     data = {}
     data['objects_list'] = publishers
     return render(request, template_name, data)
 
+
 def ViewPublisher(request, pk, template_name='data/publisher/publisher.html'):
-    context={}
-    publisher=get_object_or_404(Publisher, pk=pk)
+    context = {}
+    publisher = get_object_or_404(Publisher, pk=pk)
     context['publisher'] = publisher
     return render(request, template_name, context)
+
 
 def UpdatePublisher(request, pk, template_name='data/publisher/update.html'):
     context = {}
@@ -122,16 +132,17 @@ def UpdatePublisher(request, pk, template_name='data/publisher/update.html'):
 
 
 def DeletePublisher(request, pk, template_name='data/publisher/delete.html'):
-    context={}
+    context = {}
     context['publisher'] = get_object_or_404(Publisher, pk=pk)
     return render(request, template_name, context)
 
 
 def ViewDeveloper(request, pk, template_name='data/developer/developer.html'):
-    context={}
-    developer=get_object_or_404(Developer, pk=pk)
+    context = {}
+    developer = get_object_or_404(Developer, pk=pk)
     context['developer'] = developer
     return render(request, template_name, context)
+
 
 def UpdateDeveloper(request, pk, template_name='data/developer/update.html'):
     context = {}
@@ -146,20 +157,24 @@ def UpdateDeveloper(request, pk, template_name='data/developer/update.html'):
 
 
 def DeleteDeveloper(request, pk, template_name='data/developer/delete.html'):
-    context={}
+    context = {}
     context['developer'] = get_object_or_404(Developer, pk=pk)
     return render(request, template_name, context)
+
 
 def DeveloperList(request, template_name='data/developer_list.html'):
     developers = Developer.objects.all()
     data = {}
     data['objects_list'] = developers
     return render(request, template_name, data)
+
+
 def ViewPlatform(request, pk, template_name='data/platform/platform.html'):
-    context={}
-    platform=get_object_or_404(Platform, pk=pk)
+    context = {}
+    platform = get_object_or_404(Platform, pk=pk)
     context['platform'] = platform
     return render(request, template_name, context)
+
 
 def UpdatePlatform(request, pk, template_name='data/platform/update.html'):
     context = {}
@@ -174,9 +189,10 @@ def UpdatePlatform(request, pk, template_name='data/platform/update.html'):
 
 
 def DeletePlatform(request, pk, template_name='data/platform/delete.html'):
-    context={}
+    context = {}
     context['developer'] = get_object_or_404(Developer, pk=pk)
     return render(request, template_name, context)
+
 
 def PlatformList(request, template_name='data/platform_list.html'):
     platforms = Platform.objects.all()
