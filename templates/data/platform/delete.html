@@ -4,7 +4,7 @@
     <form method="post">
         {% csrf_token %}
         Are you sure you want to delete this Platform?<br>
-        Title: {{ platform.title }}
+        Title: {{ platform.platform_name }}
         <input type="submit" value="Delete" />
     </form>
 {% endblock %}

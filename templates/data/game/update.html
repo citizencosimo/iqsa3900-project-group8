@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {%  block content %}
 {% block title %}{{ game.title }}{% endblock %}
-    <h1>{{ game.title }}</h1>
+    <h1>Edit {{ game.title }}</h1>
+    <form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+        <table>{{form.as_table}}</table>
+        <button type="submit">Update</button>
+    </form>
 {% endblock %}
