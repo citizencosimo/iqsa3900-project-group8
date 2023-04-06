@@ -3,9 +3,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PublisherForm, GameForm, DeveloperForm, GenreForm, PlatformForm, LanguageForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from groupproject.models import Game, Publisher, Developer, Platform, Genre, Language
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 
 def DatabaseLinks(request):
@@ -24,6 +25,8 @@ def CreatePublisher(request):
     form = PublisherForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
+        messages.success(request, 'Successfully Added')
+        return redirect('publisher_list')
     context['form'] = form
     return render(request, 'data/forms/publisher_a.html', context)
 
@@ -33,6 +36,8 @@ def CreateDeveloper(request):
     form = DeveloperForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
+        messages.success(request, 'Successfully Added')
+        return redirect('developer_list')
     context['form'] = form
     return render(request, 'data/forms/add_developer.html', context)
 
@@ -42,6 +47,8 @@ def CreatePlatform(request):
     form = PlatformForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
+        messages.success(request, 'Successfully Added')
+        return redirect('platform_list')
     context['form'] = form
     return render(request, 'data/forms/add_platform.html', context)
 
@@ -50,7 +57,9 @@ def CreateGenre(request):
     context = {}
     form = GenreForm(request.POST or None, request.FILES or None)
     if form.is_valid():
+        messages.success(request, 'Successfully Added')
         form.save()
+        return redirect('database_links')
     context['form'] = form
     return render(request, 'data/forms/add_genre.html', context)
 
@@ -59,7 +68,9 @@ def CreateLanguage(request):
     context = {}
     form = LanguageForm(request.POST or None, request.FILES or None)
     if form.is_valid():
+        messages.success(request, 'Successfully Added')
         form.save()
+        return redirect('database_links')
     context['form'] = form
     return render(request, 'data/forms/add_language.html', context)
 
@@ -69,6 +80,8 @@ def CreateGame(request):
     form = GameForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
+        messages.success(request, 'Successfully Added')
+        return redirect('game_list')
     context['form'] = form
     return render(request, 'data/forms/add_game.html', context)
 
@@ -88,6 +101,7 @@ def UpdateGame(request, pk, template_name='data/game/update.html'):
     context['form'] = form
     if form.is_valid():
         form.save()
+        messages.success(request, 'Successfully Updated')
         return redirect('game_list')
     return render(request, template_name, context)
 
@@ -127,6 +141,7 @@ def UpdatePublisher(request, pk, template_name='data/publisher/update.html'):
     context['form'] = form
     if form.is_valid():
         form.save()
+        messages.success(request, 'Successfully Updated')
         return redirect('publisher_list')
     return render(request, template_name, context)
 
@@ -152,6 +167,7 @@ def UpdateDeveloper(request, pk, template_name='data/developer/update.html'):
     context['form'] = form
     if form.is_valid():
         form.save()
+        messages.success(request, 'Successfully Updated')
         return redirect('developer_list')
     return render(request, template_name, context)
 
@@ -184,6 +200,7 @@ def UpdatePlatform(request, pk, template_name='data/platform/update.html'):
     context['form'] = form
     if form.is_valid():
         form.save()
+        messages.success(request, 'Successfully Updated')
         return redirect('platform_list')
     return render(request, template_name, context)
 
