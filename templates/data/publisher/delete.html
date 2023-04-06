@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{%  block content %}
+{% block title %}Confirm Deletion{% endblock %}
+    <form method="post">
+        {% csrf_token %}
+        Are you sure you want to delete this Publisher?<br>
+        Title: {{ publisher.title }}
+        <input type="submit" value="Delete" />
+    </form>
+{% endblock %}
