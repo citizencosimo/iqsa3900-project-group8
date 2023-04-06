@@ -12,9 +12,9 @@
     <tbody>
         {% for game in objects_list %}
         <tr>
-            <td>{{ game.title }} ({{ game.platform }})</td>
-            <td></td>
-            <td></td>
+            <td><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></td>
+            <td><a href={% url 'update_game' pk=game.pk %}>Update</a></td>
+            <td><a href={% url 'delete_game' pk=game.pk %}>Delete</a></td>
         </tr>
 
         {% endfor %}

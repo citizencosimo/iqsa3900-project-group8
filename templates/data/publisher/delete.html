@@ -4,7 +4,7 @@
     <form method="post">
         {% csrf_token %}
         Are you sure you want to delete this Publisher?<br>
-        Title: {{ publisher.title }}
+        Title: {{ publisher.publisher_name }}
         <input type="submit" value="Delete" />
     </form>
 {% endblock %}

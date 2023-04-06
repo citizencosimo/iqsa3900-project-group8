@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{%  block content %}
+{% block title %}View All Platforms{% endblock %}
+<table>
+    <thead>
+        <tr>
+            <th>Platform Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for platform in objects_list %}
+        <tr>
+            <td><a href="{{ platform.get_absolute_url }}">{{ platform.platform_name }}</a></td>
+            <td><a href={% url 'update_platform' pk=platform.pk %}>Update</a></td>
+            <td><a href={% url 'delete_platform' pk=platform.pk %}>Delete</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{%  endblock %}

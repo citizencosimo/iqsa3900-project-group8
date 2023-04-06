@@ -4,7 +4,7 @@
     <form method="post">
         {% csrf_token %}
         Are you sure you want to delete this Developer?<br>
-        Title: {{ developer.title }}
+        Title: {{ developer.developer_name }}
         <input type="submit" value="Delete" />
     </form>
 {% endblock %}

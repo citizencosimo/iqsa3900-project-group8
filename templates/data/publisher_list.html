@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{%  block content %}
+{% block title %}View All Publishers{% endblock %}
+<table>
+    <thead>
+        <tr>
+            <th>Publisher Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for publisher in objects_list %}
+        <tr>
+            <td><a href="{{ publisher.get_absolute_url }}">{{ publisher.publisher_name }}</a></td>
+            <td><a href={% url 'update_publisher' pk=publisher.pk %}>Update</a></td>
+            <td><a href={% url 'delete_publisher' pk=publisher.pk %}>Delete</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{%  endblock %}

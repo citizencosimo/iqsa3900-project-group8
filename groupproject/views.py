@@ -92,7 +92,7 @@ def DeleteGame(request, pk, template_name='data/game/delete.html'):
     return render(request, template_name, context)
 
 def GameList(request, template_name='data/game_list.html'):
-    gamess = Game.objects.all()
+    games = Game.objects.all()
     data = {}
     data['objects_list'] = games
     return render(request, template_name, data)
@@ -179,7 +179,7 @@ def DeletePlatform(request, pk, template_name='data/platform/delete.html'):
     return render(request, template_name, context)
 
 def PlatformList(request, template_name='data/platform_list.html'):
-    developers = Developer.objects.all()
+    platforms = Platform.objects.all()
     data = {}
-    data['objects_list'] = developers
+    data['objects_list'] = platforms
     return render(request, template_name, data)
