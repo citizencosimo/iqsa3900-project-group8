@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {%  block content %}
     <ul>
-        
+        {% for site in site_names %}
+            <li>
+                <a href="{{ site.0 }}">{{ site.1 }}</a>
+            </li>
+        {% endfor %}
+        <li><a href="{% url 'home' %}">Home</a></li>
     </ul>
 {% endblock %}

@@ -2,6 +2,7 @@ import uuid
 
 from accounts.models import CustomUser
 from django.db import models
+from django.urls import reverse
 
 
 class Language(models.Model):
@@ -31,6 +32,8 @@ class Publisher(models.Model):
 
     def __str__(self):
         return self.publisher_name
+    def get_absolute_url(self):
+        return reverse('publisher_view', args=str(self.pk))
 
 
 class Developer(models.Model):
@@ -39,6 +42,10 @@ class Developer(models.Model):
         upload_to='images/', blank=True, null=True)
     developer_country = models.CharField(max_length=500)
     developer_description = models.CharField(max_length=1000)
+
+    def get_absolute_url(self):
+        return reverse('developer_view', args=str(self.pk))
+
 
     def __str__(self):
         return self.developer_name
@@ -52,7 +59,8 @@ class Platform(models.Model):
 
     def __str__(self):
         return self.platform_name
-
+    def get_absolute_url(self):
+        return reverse('platform_view', args=str(self.pk))
 
 class Game(models.Model):
     title = models.CharField(max_length=100)
@@ -98,7 +106,9 @@ class Game(models.Model):
         ordering = ['title', 'platform', 'release_date']
 
     def __str__(self):
-        return self.title + ' (' + self.platform + ', ' + self.release_date.year + ')'
+        return self.title + ' (' + self.platform.platform_name + ', ' + str(self.release_date.year) + ')'
+    def get_absolute_url(self):
+        return reverse('game_view', args=str(self.pk))
 
 
 class Review(models.Model):
