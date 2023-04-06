@@ -21,7 +21,7 @@ class GameForm(ModelForm):
     class Meta:
         model = Game
         fields = ['title', 'publisher', 'developer', 'release_date', 'platform',
-                  'rating', 'genre', 'language', 'image']
+                  'description', 'rating', 'genre', 'language', 'image']
 
         widgets = {
             'release_date': forms.widgets.DateInput(attrs={'type':'date'})
