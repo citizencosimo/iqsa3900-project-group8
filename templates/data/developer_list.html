@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{%  block content %}
+{% block title %}View All Developers{% endblock %}
+<a href="{% url 'add_developer' %}">Add a new developer.</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Developer Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for developer in objects_list %}
+        <tr>
+            <td><a href="{{ developer.get_absolute_url }}">{{ developer.developer_name }}</a></td>
+            <td><a href={% url 'update_developer' pk=developer.pk %}>Update</a></td>
+            <td><a href={% url 'delete_developer' pk=developer.pk %}>Delete</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{%  endblock %}

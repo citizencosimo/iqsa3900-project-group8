@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{%  block content %}
+{% block title %}View All Games{% endblock %}
+<a href='{% url 'add_game' %}'>Add a game</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in objects_list %}
+        <tr>
+            <td><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></td>
+            <td><a href={% url 'update_game' pk=game.pk %}>Update</a></td>
+            <td><a href={% url 'delete_game' pk=game.pk %}>Delete</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{%  endblock %}

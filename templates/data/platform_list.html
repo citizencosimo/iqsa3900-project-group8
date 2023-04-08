@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Platforms{% endblock %}
+{%  block content %}
+
+<h1 class="page_head">All Platforms</h1><a href='{% url 'add_platform' %}'>Add a platform</a>
+<div class="container">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Platform Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for platform in objects_list %}
+        <tr>
+            <td><a href="{{ platform.get_absolute_url }}">{{ platform.platform_name }}</a></td>
+            <td><a href={% url 'update_platform' pk=platform.pk %}>Update</a></td>
+            <td><a href={% url 'delete_platform' pk=platform.pk %}>Delete</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table></div>
+{%  endblock %}

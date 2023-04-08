@@ -1,5 +1,6 @@
 
 from django.forms import ModelForm
+from django import forms
 from .models import Platform, Publisher, Developer, Game, Language, Genre
 
 class PublisherForm(ModelForm):
@@ -20,7 +21,11 @@ class GameForm(ModelForm):
     class Meta:
         model = Game
         fields = ['title', 'publisher', 'developer', 'release_date', 'platform',
-                  'rating', 'genre', 'language', 'image']
+                  'description', 'rating', 'genre', 'language', 'image']
+
+        widgets = {
+            'release_date': forms.widgets.DateInput(attrs={'type':'date'})
+        }
 
 class LanguageForm(ModelForm):
     class Meta:
