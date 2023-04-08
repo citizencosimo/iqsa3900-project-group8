@@ -8,9 +8,9 @@ def search(request):
     print(query)
     print(type(query))
     games = Game.objects.filter(title__contains=query)
-    for game in games:
-        print(game.title)
-        print(game.release_date)
+    # for game in games:
+    #     print(game.title)
+    #     print(game.release_date)
     context = {
         'query': query,
         'games': games,
