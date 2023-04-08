@@ -110,7 +110,12 @@ def UpdateGame(request, pk, template_name='data/game/update.html'):
 
 def DeleteGame(request, pk, template_name='data/game/delete.html'):
     context = {}
-    context['game'] = get_object_or_404(Game, pk=pk)
+    obj = get_object_or_404(Game, pk=pk)
+    context['game'] = obj
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, 'Successfully Deleted')
+        return redirect('database_links')
     return render(request, template_name, context)
 
 
@@ -150,7 +155,12 @@ def UpdatePublisher(request, pk, template_name='data/publisher/update.html'):
 
 def DeletePublisher(request, pk, template_name='data/publisher/delete.html'):
     context = {}
-    context['publisher'] = get_object_or_404(Publisher, pk=pk)
+    obj = get_object_or_404(Publisher, pk)
+    context['publisher'] = obj
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, 'Successfully Deleted')
+        return redirect('database_links')
     return render(request, template_name, context)
 
 
@@ -176,7 +186,12 @@ def UpdateDeveloper(request, pk, template_name='data/developer/update.html'):
 
 def DeleteDeveloper(request, pk, template_name='data/developer/delete.html'):
     context = {}
-    context['developer'] = get_object_or_404(Developer, pk=pk)
+    obj = get_object_or_404(Developer, pk=pk)
+    context['developer'] = obj
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, 'Successfully Deleted')
+        return redirect('database_links')
     return render(request, template_name, context)
 
 
@@ -209,7 +224,12 @@ def UpdatePlatform(request, pk, template_name='data/platform/update.html'):
 
 def DeletePlatform(request, pk, template_name='data/platform/delete.html'):
     context = {}
-    context['developer'] = get_object_or_404(Developer, pk=pk)
+    obj = get_object_or_404(Platform, pk=pk)
+    context['developer'] = obj
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, 'Successfully Deleted')
+        return redirect('database_links')
     return render(request, template_name, context)
 
 
