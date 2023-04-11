@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'groupproject.apps.GroupprojectConfig',
+    'usertools.apps.UsertoolsConfig',
     'accounts',
     'search.apps.SearchConfig',
 
