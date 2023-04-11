@@ -122,7 +122,7 @@ def DeleteGame(request, pk, template_name='data/game/delete.html'):
 def GameList(request, template_name='data/game_list.html'):
     games = Game.objects.all()
     data = {}
-    data['objects_list'] = games
+    data['games'] = games
     return render(request, template_name, data)
 
 

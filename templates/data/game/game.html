@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
-{%  block content %}
-{% block title %}{{ game.title }}{% endblock %}
-    <h1>{{ game.title }}</h1>
-    <h2>{{ game.rating }}</h2>
+{% block content %}
+{% block title %}<h1>{{ game.title }}</h1>{% endblock %}
+<p>Publisher: {{ game.publisher }}</p>
+<p>Developer: {{ game.developer }}</p>
+<p>Release Date: {{ game.release_date }}</p>
+<p>Platform: {{ game.plaftform }}</p>
+<p>Description: {{ game.description }}</p>
+<p>Rating: {{ game.rating }}</p>
+<p>Genre: {{ game.genre }}</p>
+<p>Langauge: {{ game.langauge }}</p>
+<p>Image: {{ game.image }}</p>
 {% endblock %}

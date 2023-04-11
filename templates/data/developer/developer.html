@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
-{%  block content %}
-{% block title %}{{ developer.developer_name }}{% endblock %}
-    <h1>{{ developer.developer_name }}</h1>
+{% block content %}
+{% block title %}<h1>{{ developer.developer_name }}</h1>{% endblock %}
+<p>Country: {{ developer.developer_country }}</p>
+<p>Description: {{ developer.developer_description }}</p>
+<p>Image: {{ developer.developer_image }}</p>
 {% endblock %}
+

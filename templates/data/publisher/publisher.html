@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-{%  block content %}
-{% block title %}{{ publisher.publisher_name }}{% endblock %}
-    <h1>{{ publisher.publisher_name }}</h1>
+{% block content %}
+{% block title %}<h1>{{ publisher.publisher_name }}</h1>{% endblock %}
+    <p>Country: {{ publisher.publisher_country }}</p>
+    <p>Description: {{ publisher.publisher_description }}</p>
+    <p>Image: {{ publisher.publisher_image }}</p>
 {% endblock %}

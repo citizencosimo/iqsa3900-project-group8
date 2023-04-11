@@ -24,6 +24,6 @@ urlpatterns = [
     path('delete_platform/<int:pk>', views.DeletePlatform, name='delete_platform'),
     path('view_platform/<int:pk>', views.ViewPlatform, name='platform_view'),
     path('platforms', views.PlatformList, name="platform_list"),
-    path('', views.DatabaseLinks, name='database_links')
-
+    path('', views.DatabaseLinks, name='database_links'),
+    path('games/', views.GameList, name='game_list')
 ]

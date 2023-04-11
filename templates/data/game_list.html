@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for game in objects_list %}
+        {% for game in games %}
         <tr>
             <td><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></td>
             <td><a href={% url 'update_game' pk=game.pk %}>Update</a></td>
