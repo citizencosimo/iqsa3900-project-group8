@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -25,5 +25,6 @@ urlpatterns = [
     path('view_platform/<int:pk>', views.ViewPlatform, name='platform_view'),
     path('platforms', views.PlatformList, name="platform_list"),
     path('', views.DatabaseLinks, name='database_links'),
-    path('games/', views.GameList, name='game_list')
+    path('games/', views.GameList, name='game_list'),
+    path('review/', include('reviewertools.urls')),
 ]
