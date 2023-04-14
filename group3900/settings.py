@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'groupproject.apps.GroupprojectConfig',
     'usertools.apps.UsertoolsConfig',
     'accounts',
+    'reviewertools.apps.ReviewertoolsConfig',
     'search.apps.SearchConfig',
 
 ]

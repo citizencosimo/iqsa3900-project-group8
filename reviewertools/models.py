@@ -8,7 +8,7 @@ from django.db import models
 
 class Review(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    game = models.ForeignKey('Game', on_delete=models.CASCADE)
+    game = models.ForeignKey('groupproject.Game', on_delete=models.CASCADE)
     description = models.CharField(
         max_length=255, help_text='A descriptive headline for your review'
     )
@@ -27,8 +27,8 @@ class Review(models.Model):
 
 class ReviewTicket(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4())
-    moderation_target = models.ForeignKey('Review', null=True)
-    moderation_user = models.ForeignKey('CustomUser', null=True)
+    moderation_target = models.ForeignKey('Review', on_delete=models.SET_NULL, null=True)
+    moderation_user = models.ForeignKey('accounts.CustomUser', on_delete = models.SET_NULL, null=True)
 
     INNAPROPRIATE = 'INN'
     OFFTOPIC = 'OFF'
