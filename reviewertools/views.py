@@ -10,7 +10,7 @@ def ReviewIndexTest(request):
 def CreateReview(request, game_id):
         context = {}
         context["form"] = ReviewForm(request.POST or None, request.FILES or None)
-
-        game = get_object_or_404(Game, pk=game_id)
+        context["game"] = get_object_or_404(Game, pk=game_id)
+        return render(request, 'review/view.html', context)
 
 
