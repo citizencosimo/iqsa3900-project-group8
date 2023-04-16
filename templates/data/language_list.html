@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{%  block content %}
+{% block title %}View All Languages{% endblock %}
+<a href='{% url 'add_language' %}'>Add a language</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for language in languages %}
+        <tr>
+            <td><a href="{{ language.get_absolute_url }}">{{ language.name }}</a></td>
+            <td><a href={% url 'update_language' pk=language.pk %}>Update</a></td>
+            <td><a href={% url 'delete_language' pk=language.pk %}>Delete</a></td>
+
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{%  endblock %}
