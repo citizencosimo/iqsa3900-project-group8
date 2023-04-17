@@ -27,4 +27,12 @@ urlpatterns = [
     path('', views.DatabaseLinks, name='database_links'),
     path('games/', views.GameList, name='game_list'),
     path('review/', include('reviewertools.urls')),
+    path('genres/', views.GenreList, name='genre_list'),
+    path('view_genre/<int:pk>', views.ViewGenre, name='genre_view'),
+    path('update_genre/<int:pk>', views.UpdateGenre, name='update_genre'),
+    path('delete_genre/<int:pk>', views.DeleteGenre, name='delete_genre'),
+    path('languages/', views.LanguageList, name='language_list'),
+    path('view_language/<int:pk>', views.ViewLanguage, name='language_view'),
+    path('update_language/<int:pk>', views.UpdateLanguage, name='update_language'),
+    path('delete_language/<int:pk>', views.DeleteLanguage, name='delete_language'),
 ]

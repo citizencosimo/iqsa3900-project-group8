@@ -11,14 +11,19 @@ class Language(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('language_view', args=str(self.pk))
+
 class Genre(models.Model):
     name = models.CharField(
         max_length=25, help_text="The genre(s) of the game.")
     description = models.CharField(max_length=500, blank="True", null="True")
 
-
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('genre_view', args=str(self.pk))
 
 
 class Publisher(models.Model):
@@ -72,7 +77,7 @@ class Game(models.Model):
         'Platform', on_delete=models.RESTRICT, null=True)
 
     language = models.ManyToManyField(Language, related_name='language')
-    genre = models.ManyToManyField(Genre, related_name='language')
+    genre = models.ManyToManyField(Genre, related_name='genre')
 
     UNRATED = 'UR'
     EVERYONE = 'EO'
