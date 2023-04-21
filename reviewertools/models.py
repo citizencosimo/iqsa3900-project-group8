@@ -48,4 +48,6 @@ class ReviewTicket(models.Model):
     )
     moderation_note = models.CharField(max_length=5000, help_text='If you selected other, please tell us why.')
 
+    ticket_open = models.BooleanField(default=False)
+
 # Create your models here.

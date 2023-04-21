@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'groupproject.apps.GroupprojectConfig',
     'usertools.apps.UsertoolsConfig',
+    'widget_tweaks',
     'accounts',
     'reviewertools.apps.ReviewertoolsConfig',
     'search.apps.SearchConfig',

@@ -18,7 +18,7 @@
     </div>
     {% if games %}
         {% for game in games %}
-            <h1>{{ game.title }}</h1>
+            <h1><{{ game.title }}</h1>
             <p> Released on {{ game.release_date|date:"F d, Y" }}.</p>
         {% endfor %}
     {% else %}
