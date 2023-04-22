@@ -19,3 +19,10 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+    
+    def form_valid(self, form):
+        form.save(commit=False)
+        if 'user_image' in self.request.FILES:
+            self.object.user_image = self.request.FILES['user_image']
+        self.object.save()
+        return super().form_valid(form)
