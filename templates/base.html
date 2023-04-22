@@ -56,6 +56,7 @@
                   <i class="fas fa-user"></i> {{ user.username }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="userDropdown">
+                  <a class="dropdown-item" href="{% url 'profile_user' %}">View Profile</a>
                   <a class="dropdown-item" href="{% url 'profile_update' %}">Manage Profile</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>

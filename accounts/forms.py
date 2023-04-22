@@ -13,3 +13,15 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ("user_image","username","first_name", "last_name", "email")
+
+class UserProfileForm(forms.ModelForm):
+    user_image = forms.ImageField(required=False, widget=forms.FileInput)
+    class Meta:
+        model = CustomUser
+        fields = ("user_image", "username", "first_name", "last_name", "email")
+        widgets = {
+            "username": forms.TextInput(attrs={'readonly': 'readonly'}),
+            "first_name": forms.TextInput(attrs={'readonly': 'readonly'}),
+            "last_name": forms.TextInput(attrs={'readonly': 'readonly'}),
+            "email": forms.TextInput(attrs={'readonly': 'readonly'}),
+        }

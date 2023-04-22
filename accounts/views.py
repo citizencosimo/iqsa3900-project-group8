@@ -1,7 +1,9 @@
 # accounts/views.py
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .forms import UserProfileForm
 from .models import CustomUser
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -26,3 +28,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
             self.object.user_image = self.request.FILES['user_image']
         self.object.save()
         return super().form_valid(form)
+    
+def profile_user(request):
+    form = UserProfileForm(instance=request.user)
+    return render(request, 'accounts/profile_user.html', {'form': form})
