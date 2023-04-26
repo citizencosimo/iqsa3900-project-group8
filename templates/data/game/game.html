@@ -11,4 +11,23 @@
 <p>Langauge: {{ game.langauge }}</p>
 <p>Image: {{ game.image }}</p>
 <a href={% url 'write_review' game_id=game.pk %}>Link</a>
+
+    {% if reviews %}
+        {% for r in reviews %}
+            <hr>
+            <div class="jumbotron">
+                <p class="lead"><em>{{ r.user.username }} writes...</em></p>
+                <h3 class="display-4">{{ r.description }}</h3>
+                <p>{{ r.comment }}</p>
+                {% if request.user.username == r.user.username %}<a href="">Edit</a>
+                {% else %}
+                    <a href="">Report</a>
+                {% endif %}
+            </div>
+
+        {% endfor %}
+    {%  else %}
+        NO REVIEWS YET. <a href="{%  url 'write_review' game_id=game.pk %}">Why not be the first?</a>
+    {% endif %}
+
 {% endblock %}

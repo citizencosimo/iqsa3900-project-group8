@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
+
+from reviewertools.models import Review
 from .forms import PublisherForm, GameForm, DeveloperForm, GenreForm, PlatformForm, LanguageForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
@@ -158,7 +160,10 @@ def CreateGame(request):
 
 def ViewGame(request, pk, template_name='data/game/game.html'):
     context = {}
+
     game = get_object_or_404(Game, pk=pk)
+    reviews = Review.objects.filter(game=game)
+    context['reviews'] = reviews
     context['game'] = game
     return render(request, template_name, context)
 

@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.db import models
 
 
+
 class Review(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     game = models.ForeignKey('groupproject.Game', on_delete=models.CASCADE)
@@ -21,6 +22,10 @@ class Review(models.Model):
         max_length=100, null=True, blank=True)
 
     user = models.ForeignKey('accounts.CustomUser', on_delete=models.RESTRICT)
+
+
+
+
 
     def __str__(self):
         return self.description
