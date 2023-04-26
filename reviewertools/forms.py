@@ -33,4 +33,10 @@ class ReviewForm(ModelForm):
         model=Review
         fields = ['description', 'comment', 'is_recommended']
 
+class ReviewTicket(ModelForm):
+
+    class Meta:
+        model=ReviewTicket
+        fields= ['reason', 'moderation_note']
+
 

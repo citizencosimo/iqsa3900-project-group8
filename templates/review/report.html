@@ -1,0 +1,15 @@
+{%  extends 'base.html' %}
+{% block content %}
+    {% block title %}Report Review{% endblock %}
+    <div class="jumbotron">
+        <p class="lead"><em>{{ review.user.username }} writes...</em></p>
+        <h3 class="display-4">{{ review.description }}</h3>
+        <p>{{ review.comment }}</p>
+    </div>
+
+    <form enctype="form-data" method="post">
+      {% csrf_token %}
+        <table>{{form.as_table}}</table>
+        <button type="submit">Report</button>
+    </form>
+{% endblock %}

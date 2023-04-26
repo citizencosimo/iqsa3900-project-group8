@@ -1,8 +1,8 @@
 from datetime import time, datetime
 
-from reviewertools.models import Review
+from reviewertools.models import Review, ReviewTicket
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ReviewForm
+from .forms import ReviewForm, ReviewTicket
 from groupproject.forms import Game
 from django.contrib import messages
 
@@ -50,6 +50,32 @@ def UpdateReview(request, review_id):
         else:
                 messages.error(request, "Cannot edit: You are not the author.")
                 return redirect('game_view', pk=review.game.pk)
+
+def ReportReview(request, review_id):
+        context = {}
+        review = get_object_or_404(Review, pk=review_id)
+        form = ReviewTicket(request.POST or None)
+        context['review'] = review
+        context['form'] = form
+        if form.is_valid():
+                form.moderation_target = review
+                form.moderation_user = review.user
+                form.instance.is_open = True
+                cleaned_data = form.cleaned_data
+                review.is_flagged = True
+                review.moderation_message = form.instance.moderation_note
+                review.save()
+                form.save(cleaned_data)
+                messages.success(request, 'Thank you for your feedback. A moderator will review your ticket and'
+                                          'take appropriate action.')
+                return redirect('game_view', pk=review.game.pk)
+        return render(request, 'review/report.html', context)
+
+def ProcessTickets(request, template_name='review/process_tickets'):
+        context = {}
+        flagged_reviews = ReviewTicket.objects.filter(ticket_open=True)
+        context["flagged_reviews"] = flagged_reviews
+        return render(request, template_name, context)
 
 
 

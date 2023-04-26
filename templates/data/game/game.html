@@ -22,7 +22,7 @@
                 {% if request.user.username == r.user.username %}
                     <a href="{%  url 'update_review' review_id=r.pk %}">Edit</a>
                 {% else %}
-                    <a href="">Report</a>
+                    <a href="{%  url 'report_review' review_id=r.pk %}">Report</a>
                 {% endif %}
             </div>
 
