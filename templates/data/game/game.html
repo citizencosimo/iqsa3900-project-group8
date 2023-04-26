@@ -19,7 +19,8 @@
                 <p class="lead"><em>{{ r.user.username }} writes...</em></p>
                 <h3 class="display-4">{{ r.description }}</h3>
                 <p>{{ r.comment }}</p>
-                {% if request.user.username == r.user.username %}<a href="">Edit</a>
+                {% if request.user.username == r.user.username %}
+                    <a href="{%  url 'update_review' review_id=r.pk %}">Edit</a>
                 {% else %}
                     <a href="">Report</a>
                 {% endif %}
