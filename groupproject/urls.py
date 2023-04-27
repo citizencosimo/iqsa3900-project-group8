@@ -2,7 +2,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('publisher_a', views.CreatePublisher, name='add_publisher'),
+    path('add_publisher', views.CreatePublisher, name='add_publisher'),
     path('add_game', views.CreateGame, name='add_game'),
     path('add_genre', views.CreateGenre, name='add_genre'),
     path('add_language', views.CreateLanguage, name='add_language'),
