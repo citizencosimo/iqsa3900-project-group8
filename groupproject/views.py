@@ -20,7 +20,8 @@ def DatabaseLinks(request):
                        ('genres', 'Genre List'),
                        ('languages', 'Language List'),
                        ('add_language', 'Add Language'),
-                       ('add_genre', 'Add Genre')]
+                       ('add_genre', 'Add Genre'),
+        ]
 
     }
     return render(request, 'data/list.html', context)

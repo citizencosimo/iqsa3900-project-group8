@@ -1,10 +1,13 @@
 from datetime import time, datetime
 
+from django.core.mail import send_mail
+
 from reviewertools.models import Review, ReviewTicket
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ReviewForm, ReviewTicket
+from .forms import ReviewForm, ReviewTicketForm, TicketResolutionForm
 from groupproject.forms import Game
 from django.contrib import messages
+from django.conf import settings
 
 def ReviewIndexTest(request):
         context = {}
@@ -54,7 +57,7 @@ def UpdateReview(request, review_id):
 def ReportReview(request, review_id):
         context = {}
         review = get_object_or_404(Review, pk=review_id)
-        form = ReviewTicket(request.POST or None, request.FILES or None)
+        form = ReviewTicketForm(request.POST or None, request.FILES or None)
         context['review'] = review
         context['form'] = form
         print(review.user.username)
@@ -62,7 +65,7 @@ def ReportReview(request, review_id):
         if form.is_valid():
                 form.instance.moderation_target = review
                 form.instance.moderation_user = review.user
-                form.instance.is_open = True
+                form.instance.ticket_open = True
                 cleaned_data = form.cleaned_data
                 review.is_flagged = True
                 review.moderation_message = form.instance.moderation_note
@@ -73,11 +76,31 @@ def ReportReview(request, review_id):
                 return redirect('game_view', pk=review.game.pk)
         return render(request, 'review/report.html', context)
 
-def ProcessTickets(request, template_name='review/process_tickets'):
+
+def ListOpenTickets(request, template_name='review/process_tickets.html'):
         context = {}
         flagged_reviews = ReviewTicket.objects.filter(ticket_open=True)
         context["flagged_reviews"] = flagged_reviews
         return render(request, template_name, context)
+
+def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_view.html'):
+        context = {}
+        ticket = get_object_or_404(ReviewTicket, pk=ticket_id)
+        user = ticket.moderation_user
+        form = TicketResolutionForm(request.POST or None)
+        context['review'] = ticket.moderation_target
+        if form.is_valid():
+                if form.outcome == True:
+                        user.is_onprobation = form.ban_user
+                        user.moderation_message = form.message_to_creator
+                        subject = f"{user.first_name}, a review you posted has been removed."
+                        body = f"Hello {user.first_name}. After reviewing a complaint against a review you" \
+                               f"posted on our site, the staff has determined that due to its inappropriate" \
+                               f"that it should be removed. If you have any further questions, don't ask them."
+                        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, user.email)
+
+
+
 
 
 

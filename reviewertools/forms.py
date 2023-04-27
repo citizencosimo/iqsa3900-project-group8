@@ -34,10 +34,17 @@ class ReviewForm(ModelForm):
         model=Review
         fields = ['description', 'comment', 'is_recommended']
 
-class ReviewTicket(ModelForm):
+class ReviewTicketForm(ModelForm):
 
     class Meta:
         model=ReviewTicket
         fields= ['reason', 'moderation_note']
+
+class TicketResolutionForm(forms.Form):
+
+    outcome = forms.BooleanField(label="Remove review?")
+    ban_user = forms.BooleanField(label="Ban User?")
+    message_to_creator = forms.CharField(label="Message to be sent to the author of this review:")
+
 
 

@@ -10,9 +10,8 @@
 <p>Genre: {{ game.genre }}</p>
 <p>Langauge: {{ game.langauge }}</p>
 <p>Image: {{ game.image }}</p>
-<a href={% url 'write_review' game_id=game.pk %}>Link</a>
-
     {% if reviews %}
+        <a href={% url 'write_review' game_id=game.pk %}>Write a Review</a>
         {% for r in reviews %}
             <hr>
             <div class="jumbotron">
