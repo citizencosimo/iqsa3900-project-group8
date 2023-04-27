@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>User Profile</h2>
+  <form>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a href="{% url 'profile_update' %}" class="btn btn-primary">Edit Profile</a>
+  </form>
+{% endblock %}

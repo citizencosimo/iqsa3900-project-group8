@@ -1,0 +1,16 @@
+<!-- accounts/templates/accounts/profile_update.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Edit profile</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save changes</button>
+  </form>
+
+  {% if user.user_image %}
+        <h3>Current Image</h3>
+        <img src="{{ user.user_image.url }}" alt="User Image" width="200">
+    {% endif %}
+{% endblock %}
