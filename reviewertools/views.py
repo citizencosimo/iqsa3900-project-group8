@@ -23,7 +23,7 @@ def CreateReview(request, game_id):
                 form.instance.user = request.user
                 cleaned_data = form.cleaned_data
                 form.save(cleaned_data)
-
+                return redirect('game_view', pk=game.pk)
         else:
                 print('failure')
 

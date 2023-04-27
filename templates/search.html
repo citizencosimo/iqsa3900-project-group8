@@ -17,10 +17,26 @@
         </form>
     </div>
     {% if games %}
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Platform</th>
+                <th>Release Date</th>
+                <th>Publisher</th>
+                <th>Developer</th>
+            </tr>
+        </thead>
         {% for game in games %}
-            <h1><{{ game.title }}</h1>
-            <p> Released on {{ game.release_date|date:"F d, Y" }}.</p>
+            <tr>
+                <th><a href="{% url "game_view" pk=game.pk %}">{{ game.title }}</a></th>
+                <td>{{ game.platform }}</td>
+                <td>{{ game.release_date }}</td>
+                <td>{{ game.publisher }}</td>
+                <td>{{ game.developer }}</td>
+            </tr>
         {% endfor %}
+        </table>
     {% else %}
         <h1>No games found.</h1>
     {% endif %}

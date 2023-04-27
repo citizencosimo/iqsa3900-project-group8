@@ -29,6 +29,7 @@ from django import forms
 
 
 class ReviewForm(ModelForm):
+
     class Meta:
         model=Review
         fields = ['description', 'comment', 'is_recommended']
