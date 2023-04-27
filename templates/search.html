@@ -33,7 +33,7 @@
                 <td>{{ game.platform }}</td>
                 <td>{{ game.release_date }}</td>
                 <td>{{ game.publisher }}</td>
-                <td>{{ game.developer }}</td>
+                <td><a href="{% url "developer_view" pk=game.developer.pk %}">{{ game.developer }}</a></td>
             </tr>
         {% endfor %}
         </table>
