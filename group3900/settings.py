@@ -156,7 +156,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Password reset via email
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'gamesonreviewgore@gmail.com'
+EMAIL_HOST_USER = 'GamesOnReviewGore@gmail.com'
 #EMAIL_HOST_USER = 'spring2023webdevcourse'
 EMAIL_HOST_PASSWORD = 'zcnkpwvgtvelaeau'
 #EMAIL_HOST_PASSWORD = 'veputcozzyamdvke'

@@ -1,0 +1,30 @@
+{%  extends 'base.html' %}
+{% block content %}
+
+    <div class="jumbotron">
+        <p class="lead"><em>{{ review.user.username }} writes...</em></p>
+        <h3 class="display-4">{{ review.description }}</h3>
+        <p>{{ review.comment }}</p>
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <td>Game:</td>
+                <td>{{ ticket.moderation_target }}</td>
+            </tr>
+            <tr>
+                <td>User:</td>
+                <td>{{ ticket.moderation_user.username }}</td>
+            </tr>
+            <tr>
+                <td>On Probation?:</td>
+                <td>{{ review.user.is_onprobation }}</td>
+            </tr>
+            <tr>
+                <td>Note:</td>
+                <td>{{ ticket.moderation_note }}</td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock %}

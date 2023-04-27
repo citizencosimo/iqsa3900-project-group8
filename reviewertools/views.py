@@ -88,16 +88,29 @@ def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_vie
         ticket = get_object_or_404(ReviewTicket, pk=ticket_id)
         user = ticket.moderation_user
         form = TicketResolutionForm(request.POST or None)
-        context['review'] = ticket.moderation_target
+
+        context= {
+                'review':ticket.moderation_target,
+                'ticket':ticket,
+                'form':form,
+        }
         if form.is_valid():
                 if form.outcome == True:
                         user.is_onprobation = form.ban_user
                         user.moderation_message = form.message_to_creator
+                        if form.ban_user:
+                                banned = "Unfortunately, we have decided to remove your ability to post reviews until further notice."
+                        else:
+                                banned = "While we have removed your review, we hope you continue to add your input and look" \
+                                         "forward to your future contributions."
                         subject = f"{user.first_name}, a review you posted has been removed."
                         body = f"Hello {user.first_name}. After reviewing a complaint against a review you" \
                                f"posted on our site, the staff has determined that due to its inappropriate" \
-                               f"that it should be removed. If you have any further questions, don't ask them."
+                               f"that it should be removed. {banned} If you have any further questions, don't ask them."
                         send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, user.email)
+                ticket.ticket_open == False
+                return redirect('process_tickets')
+        return render(request, template_name, context)
 
 
 
