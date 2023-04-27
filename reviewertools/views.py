@@ -54,12 +54,14 @@ def UpdateReview(request, review_id):
 def ReportReview(request, review_id):
         context = {}
         review = get_object_or_404(Review, pk=review_id)
-        form = ReviewTicket(request.POST or None)
+        form = ReviewTicket(request.POST or None, request.FILES or None)
         context['review'] = review
         context['form'] = form
+        print(review.user.username)
+        print(review.game.title)
         if form.is_valid():
-                form.moderation_target = review
-                form.moderation_user = review.user
+                form.instance.moderation_target = review
+                form.instance.moderation_user = review.user
                 form.instance.is_open = True
                 cleaned_data = form.cleaned_data
                 review.is_flagged = True

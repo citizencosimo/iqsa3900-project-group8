@@ -1,0 +1,23 @@
+{%  extends 'base.html' %}
+{% block content %}
+
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Username</th>
+                <th>View</th>
+                <th>Quick Resolve</th>
+            </tr>
+        </thead>
+            {% for r in flagged_reviews %}
+                <tr>
+                    <td>[{{ r.reason }}</td>
+                    <td>{{ r.user.username }}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+{% endblock %}

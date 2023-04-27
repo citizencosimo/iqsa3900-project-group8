@@ -55,4 +55,10 @@ class ReviewTicket(models.Model):
 
     ticket_open = models.BooleanField(default=False)
 
-# Create your models here.
+    def __str__(self):
+        return "{} [{}] \"{}\" - \"{}\" - {}".format(
+            "" if self.ticket_open else "(CLOSED) ",
+            self.reason,
+            self.moderation_user.username,
+            self.moderation_target.description, self.pk)
+
