@@ -101,7 +101,7 @@ class Game(models.Model):
     )
 
     description = models.TextField(
-        max_length=1000, help_text='Enter a brief description of the game')
+        max_length=1000)
 
     image = models.ImageField(upload_to='images/', blank=True, null=True)
 

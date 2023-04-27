@@ -24,7 +24,52 @@ class GameForm(ModelForm):
                   'description', 'rating', 'genre', 'language', 'image']
 
         widgets = {
-            'release_date': forms.widgets.DateInput(attrs={'type':'date'})
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter game title'
+            }),
+            'publisher': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': "Select publisher's name"
+            }),
+            'developer': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': "Select developer's name"
+            }),
+            'release_date': forms.DateInput(attrs={
+                'id': 'release_date',
+                'class': 'form-control',
+                'placeholder': "Enter release date (mm/dd/yyyy)",
+            }),
+            'platform': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': "Select platform",
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': "Enter a brief description of the game",
+            }),
+            'rating': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': "Select game rating",
+            }),
+            'genre': forms.SelectMultiple(attrs={
+                'class': 'form-control',
+                'placeholder': "Select game genre",
+            }),
+            'language': forms.SelectMultiple(attrs={
+                'class': 'form-control',
+                'placeholder': "Select language",
+            }),
+            'image': forms.FileInput(attrs={
+                'class': 'form-control-file',
+                'placeholder': "Select image",
+            }),
+            #'release_date': forms.DateTimeInput(attrs={
+            #    'class': 'form-control datetimepicker-input',
+            #    'data-target': '#datetimepicker1'
+            #})
+            #'release_date': forms.widgets.DateInput(attrs={'type': 'date'})
         }
 
 class LanguageForm(ModelForm):
