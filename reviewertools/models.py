@@ -55,6 +55,8 @@ class ReviewTicket(models.Model):
 
     ticket_open = models.BooleanField(default=False)
 
+    def change_status(self):
+        self.ticket_open = not(self.ticket_open)
     def __str__(self):
         return "{} [{}] \"{}\" - \"{}\" - {}".format(
             "" if self.ticket_open else "(CLOSED) ",

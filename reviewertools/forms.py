@@ -42,8 +42,8 @@ class ReviewTicketForm(ModelForm):
 
 class TicketResolutionForm(forms.Form):
 
-    outcome = forms.BooleanField(label="Remove review?")
-    ban_user = forms.BooleanField(label="Ban User?")
+    outcome = forms.BooleanField(label="Remove review?", required=False)
+    ban_user = forms.BooleanField(label="Ban User?", required=False)
     message_to_creator = forms.CharField(label="Message to be sent to the author of this review:")
 
 

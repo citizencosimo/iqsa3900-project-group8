@@ -94,11 +94,13 @@ def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_vie
                 'ticket':ticket,
                 'form':form,
         }
+        print(context['form'])
         if form.is_valid():
-                if form.outcome == True:
-                        user.is_onprobation = form.ban_user
-                        user.moderation_message = form.message_to_creator
-                        if form.ban_user:
+                print(form.cleaned_data['outcome'])
+                if form.cleaned_data['outcome'] == True:
+                        user.is_onprobation = form.cleaned_data['ban_user']
+                        user.moderation_message = form.cleaned_data['message_to_creator']
+                        if form.data['ban_user']:
                                 banned = "Unfortunately, we have decided to remove your ability to post reviews until further notice."
                         else:
                                 banned = "While we have removed your review, we hope you continue to add your input and look" \
@@ -107,8 +109,9 @@ def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_vie
                         body = f"Hello {user.first_name}. After reviewing a complaint against a review you" \
                                f"posted on our site, the staff has determined that due to its inappropriate" \
                                f"that it should be removed. {banned} If you have any further questions, don't ask them."
-                        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, user.email)
-                ticket.ticket_open == False
+                        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [user.email])
+                ticket.change_status()
+                ticket.save()
                 return redirect('process_tickets')
         return render(request, template_name, context)
 
