@@ -1,4 +1,3 @@
-# accounts/views.py
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
@@ -6,6 +5,8 @@ from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .forms import UserProfileForm
 from .models import CustomUser
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 
 class SignUpView(CreateView):
@@ -32,3 +33,17 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 def profile_user(request):
     form = UserProfileForm(instance=request.user)
     return render(request, 'accounts/profile_user.html', {'form': form})
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('profile_update')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/profile_change_password.html', {'form': form})
