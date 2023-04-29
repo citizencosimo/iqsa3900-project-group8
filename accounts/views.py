@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from .forms import CustomUserChangeForm, CustomUserCreationForm
@@ -7,6 +7,7 @@ from .models import CustomUser
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 
 
 class SignUpView(CreateView):
@@ -44,6 +45,9 @@ def change_password(request):
             return redirect('profile_update')
         else:
             messages.error(request, 'Please correct the error below.')
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'accounts/profile_change_password.html', {'form': form})
