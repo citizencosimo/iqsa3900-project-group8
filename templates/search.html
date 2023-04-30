@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+    <div class="form-outline mx-5 d-flex align-items-center">
+        <a href="{% url 'home' %}" class="btn btn-light mr-2">&#x2190; Home</a>
+        <form id="search-form" method="get" class="flex-grow-1 d-flex">
+            {% if query %}
+                <input type="search" id="searchbox" class="form-control flex-grow-1" placeholder="{{ query }}" aria-label="Search" />
+            {% else %}
+                <input type="search" id="searchbox" class="form-control flex-grow-1" placeholder="Search for game by title" aria-label="Search" />
+            {% endif %}
+            <button type="submit" class="btn btn-primary ml-2">Search</button>
+        </form>
+    </div>
+    {% if games %}
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Platform</th>
+                <th>Release Date</th>
+                <th>Publisher</th>
+                <th>Developer</th>
+            </tr>
+        </thead>
+        {% for game in games %}
+            <tr>
+                <th><a href="{% url "game_view" pk=game.pk %}">{{ game.title }}</a></th>
+                <td>{{ game.platform }}</td>
+                <td>{{ game.release_date }}</td>
+                <td>{{ game.publisher }}</td>
+                <td><a href="{% url "developer_view" pk=game.developer.pk %}">{{ game.developer }}</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h1>No games found.</h1>
+    {% endif %}
+{% endblock content %}

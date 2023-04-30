@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{%  block content %}
+{% block title %}View All Genres{% endblock %}
+<a href='{% url 'add_genre' %}'>Add a genre</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for genre in genres %}
+        <tr>
+            <td><a href="{{ genre.get_absolute_url }}">{{ genre.name }}</a></td>
+            <td>{{ genre.description }}</td>
+            <td><a href={% url 'update_genre' pk=genre.pk %}>Update</a></td>
+            <td><a href={% url 'delete_genre' pk=genre.pk %}>Delete</a></td>
+
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{%  endblock %}

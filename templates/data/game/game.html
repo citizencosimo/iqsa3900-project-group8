@@ -1,5 +1,33 @@
 {% extends 'base.html' %}
-{%  block content %}
-{% block title %}{{ game.title }}{% endblock %}
-    <h1>{{ game.title }}</h1>
+{% block content %}
+{% block title %}<h1>{{ game.title }}</h1>{% endblock %}
+<p>Publisher: {{ game.publisher }}</p>
+<p>Developer: {{ game.developer }}</p>
+<p>Release Date: {{ game.release_date }}</p>
+<p>Platform: {{ game.plaftform }}</p>
+<p>Description: {{ game.description }}</p>
+<p>Rating: {{ game.rating }}</p>
+<p>Genre: {{ game.genre }}</p>
+<p>Langauge: {{ game.langauge }}</p>
+<p>Image: {{ game.image }}</p>
+    {% if reviews %}
+        <a href={% url 'write_review' game_id=game.pk %}>Write a Review</a>
+        {% for r in reviews %}
+            <hr>
+            <div class="jumbotron">
+                <p class="lead"><em>{{ r.user.username }} writes...</em></p>
+                <h3 class="display-4">{{ r.description }}</h3>
+                <p>{{ r.comment }}</p>
+                {% if request.user.username == r.user.username %}
+                    <a href="{%  url 'update_review' review_id=r.pk %}">Edit</a>
+                {% else %}
+                    <a href="{%  url 'report_review' review_id=r.pk %}">Report</a>
+                {% endif %}
+            </div>
+
+        {% endfor %}
+    {%  else %}
+        NO REVIEWS YET. <a href="{%  url 'write_review' game_id=game.pk %}">Why not be the first?</a>
+    {% endif %}
+
 {% endblock %}

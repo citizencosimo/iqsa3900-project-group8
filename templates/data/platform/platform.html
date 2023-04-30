@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{%  block content %}
-{% block title %}{{ platform.platform_name }}{% endblock %}
-    <h1>{{ platform.platform_name }}</h1>
+{% block content %}
+{% block title %}<h1>{{ platform.platform_name }}</h1>{% endblock %}
+    <p>Description: {{ platform.platform_description }}</p>
+    <p>Image: {{ platform.platform_image }}</p>
 {% endblock %}

@@ -1,0 +1,8 @@
+/etc/supervisor/conf.d - gunicorn conf needs top directory of project and wgsi value
+/etc/nginx/sites-available - ipv4 and top directory
+
+sudo supervisorctl restart all
+sudo nginx -t
+sudo service nginx restart
+
+

@@ -7,6 +7,7 @@ class PublisherForm(ModelForm):
     class Meta:
         model = Publisher
         fields = ['publisher_name', 'publisher_country', 'publisher_description', 'publisher_image']
+        
 class DeveloperForm(ModelForm):
     class Meta:
         model = Developer

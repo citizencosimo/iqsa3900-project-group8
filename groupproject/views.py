@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
+
+from reviewertools.models import Review
 from .forms import PublisherForm, GameForm, DeveloperForm, GenreForm, PlatformForm, LanguageForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
@@ -15,8 +17,11 @@ def DatabaseLinks(request):
                        ('developers', 'Developer List'),
                        ('publishers', 'Publisher List'),
                        ('platforms', 'Platform List'),
+                       ('genres', 'Genre List'),
+                       ('languages', 'Language List'),
                        ('add_language', 'Add Language'),
-                       ('add_genre', 'Add Genre')]
+                       ('add_genre', 'Add Genre'),
+        ]
 
     }
     return render(request, 'data/list.html', context)
@@ -76,6 +81,72 @@ def CreateLanguage(request):
     context['form'] = form
     return render(request, 'data/forms/add_language.html', context)
 
+def GenreList(request, template_name='data/genre_list.html'):
+    print(Genre.objects.all())
+    genres = Genre.objects.all()
+    for genre in genres:
+        print('genenen:', genre.pk)
+    data = {}
+    data['genres'] = genres
+    return render(request, template_name, data)
+
+def ViewGenre(request, pk, template_name='data/genre/genre.html'):
+    context = {}
+    genre = get_object_or_404(Genre, pk=pk)
+    print('Genre:', genre)
+    context['genre'] = genre
+    return render(request, template_name, context)
+
+def UpdateGenre(request, pk, template_name='data/genre/update.html'):
+    context = {}
+    genre = get_object_or_404(Genre, pk=pk)
+    context['genre'] = genre
+    form = GenreForm(request.POST or None, instance=genre)
+    context['form'] = form
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Successfully Updated')
+        return redirect('genre_list')
+    return render(request, template_name, context)
+
+
+def LanguageList(request, template_name='data/language_list.html'):
+    print(Language.objects.all())
+    languages = Language.objects.all()
+    data = {}
+    data['languages'] = languages
+    return render(request, template_name, data)
+
+
+def ViewLanguage(request, pk, template_name='data/language/language.html'):
+    context = {}
+    language = get_object_or_404(Language, pk=pk)
+    print('Language:', language)
+    context['language'] = language
+    return render(request, template_name, context)
+
+
+def UpdateLanguage(request, pk, template_name='data/language/update.html'):
+    context = {}
+    language = get_object_or_404(Language, pk=pk)
+    context['language'] = language
+    form = LanguageForm(request.POST or None, instance=language)
+    context['form'] = form
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Successfully Updated')
+        return redirect('language_list')
+    return render(request, template_name, context)
+
+def DeleteLanguage(request, pk, template_name='data/language/delete.html'):
+    context = {}
+    obj = get_object_or_404(Language, pk=pk)
+    context['language'] = obj
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, 'Successfully Deleted')
+        return redirect('database_links')
+    return render(request, template_name, context)
 
 def CreateGame(request):
     context = {}
@@ -90,10 +161,22 @@ def CreateGame(request):
 
 def ViewGame(request, pk, template_name='data/game/game.html'):
     context = {}
+
     game = get_object_or_404(Game, pk=pk)
+    reviews = Review.objects.filter(game=game)
+    context['reviews'] = reviews
     context['game'] = game
     return render(request, template_name, context)
 
+def DeleteGenre(request, pk, template_name='data/genre/delete.html'):
+    context = {}
+    obj = get_object_or_404(Genre, pk=pk)
+    context['genre'] = obj
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, 'Successfully Deleted')
+        return redirect('database_links')
+    return render(request, template_name, context)
 
 def UpdateGame(request, pk, template_name='data/game/update.html'):
     context = {}
@@ -110,14 +193,19 @@ def UpdateGame(request, pk, template_name='data/game/update.html'):
 
 def DeleteGame(request, pk, template_name='data/game/delete.html'):
     context = {}
-    context['game'] = get_object_or_404(Game, pk=pk)
+    obj = get_object_or_404(Game, pk=pk)
+    context['game'] = obj
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, 'Successfully Deleted')
+        return redirect('database_links')
     return render(request, template_name, context)
 
 
 def GameList(request, template_name='data/game_list.html'):
     games = Game.objects.all()
     data = {}
-    data['objects_list'] = games
+    data['games'] = games
     return render(request, template_name, data)
 
 
@@ -150,7 +238,12 @@ def UpdatePublisher(request, pk, template_name='data/publisher/update.html'):
 
 def DeletePublisher(request, pk, template_name='data/publisher/delete.html'):
     context = {}
-    context['publisher'] = get_object_or_404(Publisher, pk=pk)
+    obj = get_object_or_404(Publisher, pk)
+    context['publisher'] = obj
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, 'Successfully Deleted')
+        return redirect('database_links')
     return render(request, template_name, context)
 
 
@@ -176,7 +269,12 @@ def UpdateDeveloper(request, pk, template_name='data/developer/update.html'):
 
 def DeleteDeveloper(request, pk, template_name='data/developer/delete.html'):
     context = {}
-    context['developer'] = get_object_or_404(Developer, pk=pk)
+    obj = get_object_or_404(Developer, pk=pk)
+    context['developer'] = obj
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, 'Successfully Deleted')
+        return redirect('database_links')
     return render(request, template_name, context)
 
 
@@ -209,7 +307,12 @@ def UpdatePlatform(request, pk, template_name='data/platform/update.html'):
 
 def DeletePlatform(request, pk, template_name='data/platform/delete.html'):
     context = {}
-    context['developer'] = get_object_or_404(Developer, pk=pk)
+    obj = get_object_or_404(Platform, pk=pk)
+    context['developer'] = obj
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, 'Successfully Deleted')
+        return redirect('database_links')
     return render(request, template_name, context)
 
 

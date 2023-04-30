@@ -2,7 +2,7 @@
 {%  block content %}
 {% block title %}View All Games{% endblock %}
 <a href='{% url 'add_game' %}'>Add a game</a>
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Title</th>
@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for game in objects_list %}
+        {% for game in games %}
         <tr>
             <td><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></td>
             <td><a href={% url 'update_game' pk=game.pk %}>Update</a></td>

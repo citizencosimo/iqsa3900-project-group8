@@ -4,6 +4,7 @@ from groupproject.models import *
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
+from reviewertools.models import *
 
 
 admin.site.register(Game)
@@ -13,6 +14,9 @@ admin.site.register(Developer)
 admin.site.register(Publisher)
 admin.site.register(Language)
 admin.site.register(Genre)
+admin.site.register(ReviewTicket)
+
+
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm

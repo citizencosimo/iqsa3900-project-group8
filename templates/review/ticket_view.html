@@ -1,0 +1,37 @@
+{%  extends 'base.html' %}
+{% block content %}
+
+    <div class="jumbotron">
+        <p class="lead"><em>{{ review.user.username }} writes...</em></p>
+        <h3 class="display-4">{{ review.description }}</h3>
+        <p>{{ review.comment }}</p>
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <td>Game:</td>
+                <td>{{ ticket.moderation_target }}</td>
+            </tr>
+            <tr>
+                <td>User:</td>
+                <td>{{ ticket.moderation_user.username }}</td>
+            </tr>
+            <tr>
+                <td>On Probation?:</td>
+                <td>{{ review.user.is_onprobation }}</td>
+            </tr>
+            <tr>
+                <td>Note:</td>
+                <td>{{ ticket.moderation_note }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+        <form enctype="form-data" method="post">
+            {% csrf_token %}
+            <table>{{form.as_table}}</table>
+            <button type="submit">Report</button>
+        </form>
+    </div>
+
+{% endblock %}
