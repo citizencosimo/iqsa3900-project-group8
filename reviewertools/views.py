@@ -117,6 +117,7 @@ def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_vie
                 ticket.change_status()
                 ticket.save()
                 user.save()
+                messages.success(request, 'Ticket has been reviewed and closed.')
                 return redirect('process_tickets')
         return render(request, template_name, context)
 
