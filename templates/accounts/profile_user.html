@@ -1,10 +1,30 @@
 {% extends 'base.html' %}
-
+{% block title %}{{ request.user.username }}{% endblock %}
 {% block content %}
-  <h2>User Profile</h2>
-  <form>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <a href="{% url 'profile_update' %}" class="btn btn-primary">Edit Profile</a>
-  </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm border">
+                <h3>User Profile</h3>
+                <form>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <a href="{% url 'profile_update' %}" class="btn btn-primary">Edit Profile</a>
+                </form>
+            </div>
+            <div class="col-sm  border">
+                <h3>My Reviews</h3>
+            {% if reviews %}
+                <ul>
+                {% for r in reviews %}
+                    {% if r.is_flagged %}
+                        <li>{{ r.game.title }} (REVIEW IS FLAGGED)</li>
+                    {% else %}
+                        <li><a href={% url 'update_review' review_id=r.id %}>{{ r.game.title }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -161,9 +161,11 @@ def CreateGame(request):
 
 def ViewGame(request, pk, template_name='data/game/game.html'):
     context = {}
-
     game = get_object_or_404(Game, pk=pk)
-    reviews = Review.objects.filter(game=game)
+    if request.user.is_staff or request.user.is_superuser:
+        reviews = Review.objects.filter(game=game)
+    else:
+        reviews = Review.objects.filter(game=game, is_flagged=False)
     context['reviews'] = reviews
     context['game'] = game
     return render(request, template_name, context)

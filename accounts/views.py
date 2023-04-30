@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
+from reviewertools.models import Review
 
 
 class SignUpView(CreateView):
@@ -32,8 +33,10 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
     
 def profile_user(request):
-    form = UserProfileForm(instance=request.user)
-    return render(request, 'accounts/profile_user.html', {'form': form})
+    context = {}
+    context['form'] = UserProfileForm(instance=request.user)
+    context['reviews'] = Review.objects.filter(user=request.user)
+    return render(request, 'accounts/profile_user.html', context)
 
 def change_password(request):
     if request.method == 'POST':

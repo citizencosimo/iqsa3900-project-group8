@@ -28,7 +28,11 @@ class Review(models.Model):
 
 
     def __str__(self):
-        return self.description
+        return "{} - {}{}".format(
+            self.user.username,
+            self.game.title,
+            "::(FLAGGED)" if self.is_flagged == True else ""
+        )
 
 class ReviewTicket(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4())

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-{% block title %}<h1>{{ game.title }}</h1>{% endblock %}
+{% block title %}{{ game.title }}{% endblock %}
 <p>Publisher: {{ game.publisher }}</p>
 <p>Developer: {{ game.developer }}</p>
 <p>Release Date: {{ game.release_date }}</p>
@@ -15,6 +15,9 @@
         {% for r in reviews %}
             <hr>
             <div class="jumbotron">
+            {% if r.is_flagged %}
+                <p class="lead">THIS REVIEW IS FLAGGED PENDING REVIEW</p>
+            {% endif %}
                 <p class="lead"><em>{{ r.user.username }} writes...</em></p>
                 <h3 class="display-4">{{ r.description }}</h3>
                 <p>{{ r.comment }}</p>

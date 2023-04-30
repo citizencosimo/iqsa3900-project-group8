@@ -3,6 +3,7 @@ from datetime import time, datetime
 from django.core.mail import send_mail
 
 from reviewertools.models import Review, ReviewTicket
+from accounts.models import CustomUser
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ReviewForm, ReviewTicketForm, TicketResolutionForm
 from groupproject.forms import Game
@@ -86,22 +87,21 @@ def ListOpenTickets(request, template_name='review/process_tickets.html'):
 def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_view.html'):
         context = {}
         ticket = get_object_or_404(ReviewTicket, pk=ticket_id)
-        user = ticket.moderation_user
-        form = TicketResolutionForm(request.POST or None)
-
+        user = CustomUser.objects.filter(pk=ticket.moderation_user.pk)[0]
+        form = TicketResolutionForm(request.POST or None, initial={'outcome': False, 'ban_user': False})
         context= {
                 'review':ticket.moderation_target,
                 'ticket':ticket,
                 'form':form,
+                'user':user,
         }
-        print(context['form'])
         if form.is_valid():
-                print(form.cleaned_data['outcome'])
                 if form.cleaned_data['outcome'] == True:
-                        user.is_onprobation = form.cleaned_data['ban_user']
                         user.moderation_message = form.cleaned_data['message_to_creator']
-                        if form.data['ban_user']:
+                        # if form.data['ban_user']:
+                        if request.POST.get('ban_user', False):
                                 banned = "Unfortunately, we have decided to remove your ability to post reviews until further notice."
+                                user.is_onprobation = True
                         else:
                                 banned = "While we have removed your review, we hope you continue to add your input and look" \
                                          "forward to your future contributions."
@@ -109,9 +109,15 @@ def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_vie
                         body = f"Hello {user.first_name}. After reviewing a complaint against a review you" \
                                f"posted on our site, the staff has determined that due to its inappropriate" \
                                f"that it should be removed. {banned} If you have any further questions, don't ask them."
-                        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [user.email])
+                        # Mailing disabled since I have reached a set limit.
+                        # send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [user.email])
+                else:
+                        context['review'].is_flagged = False
+                        context['review'].save()
                 ticket.change_status()
                 ticket.save()
+                user.save()
+                messages.success(request, 'Ticket has been reviewed and closed.')
                 return redirect('process_tickets')
         return render(request, template_name, context)
 
