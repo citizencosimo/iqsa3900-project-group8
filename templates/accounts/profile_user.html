@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
-
+{% block title %}{{ request.user.username }}{% endblock %}
 {% block content %}
-    {% block title %}{{ request.user.username }}{% endblock %}
     <div class="container">
         <div class="row">
             <div class="col-sm border">
@@ -17,7 +16,9 @@
             {% if reviews %}
                 <ul>
                 {% for r in reviews %}
-                    {% if not r.is_flagged %}
+                    {% if r.is_flagged %}
+                        <li>{{ r.game.title }} (REVIEW IS FLAGGED)</li>
+                    {% else %}
                         <li><a href={% url 'update_review' review_id=r.id %}>{{ r.game.title }}</a></li>
                     {% endif %}
                 {% endfor %}

@@ -87,7 +87,6 @@ def ListOpenTickets(request, template_name='review/process_tickets.html'):
 def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_view.html'):
         context = {}
         ticket = get_object_or_404(ReviewTicket, pk=ticket_id)
-        # user = ticket.moderation_user
         user = CustomUser.objects.filter(pk=ticket.moderation_user.pk)[0]
         form = TicketResolutionForm(request.POST or None, initial={'outcome': False, 'ban_user': False})
         context= {
@@ -99,7 +98,8 @@ def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_vie
         if form.is_valid():
                 if form.cleaned_data['outcome'] == True:
                         user.moderation_message = form.cleaned_data['message_to_creator']
-                        if form.data['ban_user']:
+                        # if form.data['ban_user']:
+                        if request.POST.get('ban_user', False):
                                 banned = "Unfortunately, we have decided to remove your ability to post reviews until further notice."
                                 user.is_onprobation = True
                         else:
@@ -109,7 +109,8 @@ def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_vie
                         body = f"Hello {user.first_name}. After reviewing a complaint against a review you" \
                                f"posted on our site, the staff has determined that due to its inappropriate" \
                                f"that it should be removed. {banned} If you have any further questions, don't ask them."
-                        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [user.email])
+                        # Mailing disabled since I have reached a set limit.
+                        # send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [user.email])
                 else:
                         context['review'].is_flagged = False
                         context['review'].save()
