@@ -110,7 +110,10 @@ def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_vie
                                f"posted on our site, the staff has determined that due to its inappropriate" \
                                f"that it should be removed. {banned} If you have any further questions, don't ask them."
                         send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [user.email])
-                # ticket.change_status()
+                else:
+                        context['review'].is_flagged = False
+                        context['review'].save()
+                ticket.change_status()
                 ticket.save()
                 user.save()
                 return redirect('process_tickets')

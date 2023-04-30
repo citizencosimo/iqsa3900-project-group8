@@ -5,7 +5,7 @@
       <driver-ref>4d42f562-ebe9-4446-a0db-43a2ecbe42f0</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\Mulvey\Desktop\skool\iqsa3900-project-group8\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\group3900\db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>

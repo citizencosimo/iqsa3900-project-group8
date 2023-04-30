@@ -14,7 +14,5 @@ class CustomUser(AbstractUser):
                                           help_text="Explanation of why the user has been put on probation or banned.",
                                           blank=True, null=True)
 
-    def putOnProbation(self):
-        self.is_onprobation == True
     def __str__(self):
         return self.username
