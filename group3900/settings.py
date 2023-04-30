@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-c3a-1+9w03lfh6&1drr#_&h=p)tzl%wtn%*^qe44p@2*60e9g3'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -156,10 +156,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Password reset via email
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'GamesOnReviewGore@gmail.com'
-#EMAIL_HOST_USER = 'spring2023webdevcourse'
-EMAIL_HOST_PASSWORD = 'zcnkpwvgtvelaeau'
-#EMAIL_HOST_PASSWORD = 'veputcozzyamdvke'
+EMAIL_HOST_USER = str(os.getenv('EMAIL_ADMIN'))
+EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_PASSWORD'))
+
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 SERVER_EMAIL = 'root@gmail.com'
