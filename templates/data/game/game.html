@@ -4,12 +4,16 @@
 <p>Publisher: {{ game.publisher }}</p>
 <p>Developer: {{ game.developer }}</p>
 <p>Release Date: {{ game.release_date }}</p>
-<p>Platform: {{ game.plaftform }}</p>
+<p>Platform: {{ game.platform.platform_name }}</p>
 <p>Description: {{ game.description }}</p>
 <p>Rating: {{ game.rating }}</p>
-<p>Genre: {{ game.genre }}</p>
-<p>Langauge: {{ game.langauge }}</p>
-<p>Image: {{ game.image }}</p>
+<p>Genre: {{ game.genre.name }}</p>
+<p>Langauge: {{ game.language.name }}</p>
+{% if game.image %}
+    <p>Image: <img src="{{ game.image.url }}" alt="Image" /></p>
+{% else %}
+    <p>No image available</p>
+{% endif %}
     {% if reviews %}
         <a href={% url 'write_review' game_id=game.pk %}>Write a Review</a>
         {% for r in reviews %}

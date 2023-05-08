@@ -1,6 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
-
 from reviewertools.models import Review
 from .forms import PublisherForm, GameForm, DeveloperForm, GenreForm, PlatformForm, LanguageForm
 from django.views.generic import ListView, DetailView

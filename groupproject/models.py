@@ -29,7 +29,7 @@ class Genre(models.Model):
 class Publisher(models.Model):
     publisher_name = models.CharField(max_length=1000)
     publisher_image = models.ImageField(
-        upload_to='images/', null=True, blank=True)
+        upload_to='publiser/', null=True, blank=True)
     publisher_country = models.CharField(max_length=500)
     publisher_description = models.CharField(max_length=1000)
 
@@ -42,7 +42,7 @@ class Publisher(models.Model):
 class Developer(models.Model):
     developer_name = models.CharField(max_length=1000)
     developer_image = models.ImageField(
-        upload_to='images/', blank=True, null=True)
+        upload_to='developer/', blank=True, null=True)
     developer_country = models.CharField(max_length=500)
     developer_description = models.CharField(max_length=1000)
 
@@ -57,7 +57,7 @@ class Developer(models.Model):
 class Platform(models.Model):
     platform_name = models.CharField(max_length=25)
     platform_image = models.ImageField(
-        upload_to='images/', blank=True, null=True)
+        upload_to='platform/', blank=True, null=True)
     platform_description = models.CharField(max_length=1000)
 
     def __str__(self):
@@ -103,7 +103,7 @@ class Game(models.Model):
     description = models.TextField(
         max_length=1000, help_text='Enter a brief description of the game')
 
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    image = models.ImageField(upload_to='game/', blank=True, null=True)
 
     class Meta:
         ordering = ['title', 'platform', 'release_date']
