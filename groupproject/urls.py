@@ -12,6 +12,7 @@ urlpatterns = [
     path('languages/', views.LanguageList, name='language_list'),
     path('platforms', views.PlatformList, name="platform_list"),
     path('publishers', views.PublisherList, name="publisher_list"),
+    path('upload/', views.image_upload_view, name='image_upload'),
 
     #Individual Views
     path('view_developer/<int:pk>', views.ViewDeveloper, name='developer_view'),
@@ -45,4 +46,4 @@ urlpatterns = [
 
     #Review Include
     path('review/', include('reviewertools.urls')),
-]
+] 

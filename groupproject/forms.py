@@ -1,7 +1,7 @@
 
 from django.forms import ModelForm
 from django import forms
-from .models import Platform, Publisher, Developer, Game, Language, Genre
+from .models import Platform, Publisher, Developer, Game, Language, Genre, Image
 
 class PublisherForm(ModelForm):
     class Meta:
@@ -37,4 +37,9 @@ class GenreForm(ModelForm):
     class Meta:
         model=Genre
         fields='__all__'
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('title', 'image',)
 

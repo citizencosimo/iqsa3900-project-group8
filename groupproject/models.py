@@ -112,6 +112,13 @@ class Game(models.Model):
         return self.title + ' (' + self.platform.platform_name + ', ' + str(self.release_date.year) + ')'
     def get_absolute_url(self):
         return reverse('game_view', args=str(self.pk))
+    
+class Image(models.Model):
+    image = models.ImageField(upload_to='images/')
+    title = models.CharField(max_length=200, blank=True)
+
+    def __str__(self):
+        return self.title
 
 
 

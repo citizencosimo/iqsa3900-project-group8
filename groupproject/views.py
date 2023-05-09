@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from reviewertools.models import Review
-from .forms import PublisherForm, GameForm, DeveloperForm, GenreForm, PlatformForm, LanguageForm
+from .forms import PublisherForm, GameForm, DeveloperForm, GenreForm, PlatformForm, LanguageForm, ImageForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
-from groupproject.models import Game, Publisher, Developer, Platform, Genre, Language
+from groupproject.models import Game, Publisher, Developer, Platform, Genre, Language, Image
 from django.urls import reverse_lazy
 from django.contrib import messages
 
@@ -322,3 +322,14 @@ def PlatformList(request, template_name='data/platform_list.html'):
     data = {}
     data['objects_list'] = platforms
     return render(request, template_name, data)
+
+def image_upload_view(request):
+    """Image upload view."""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = ImageForm()
+    return render(request, 'upload.html', {'form': form})
