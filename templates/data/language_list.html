@@ -2,6 +2,11 @@
 {%  block content %}
 {% block title %}View All Languages{% endblock %}
 <a href='{% url 'add_language' %}'>Add a language</a>
+    <ul class="d-flex flex-wrap justify-content-center list-group-horizontal">
+        {% for language in languages %}
+        <li class="list-group-item mx-2 my-2" style="border-radius: 500px"><a href="{{ language.get_absolute_url }}">{{ language.name }}</a></li>
+        {% endfor %}
+    </ul>
 <table class="table">
     <thead>
         <tr>

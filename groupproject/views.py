@@ -35,7 +35,7 @@ def CreatePublisher(request):
         messages.success(request, 'Successfully Added')
         return redirect('publisher_list')
     context['form'] = form
-    return render(request, 'data/forms/publisher_a.html', context)
+    return render(request, 'data/forms/add_publisher.html', context)
 
 
 def CreateDeveloper(request):
