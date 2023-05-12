@@ -32,6 +32,9 @@ class Genre(models.Model):
         return self.name
 
     def get_absolute_url(self):
+        print(self.pk)
+        print(self)
+        print('HELLO')
         return reverse('genre_view', args=str(self.pk))
 
 

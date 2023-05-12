@@ -2,6 +2,11 @@
 {%  block content %}
 {% block title %}View All Genres{% endblock %}
 <a href='{% url 'add_genre' %}'>Add a genre</a>
+    <ul class="d-flex flex-wrap justify-content-center list-group-horizontal">
+        {% for genre in genres %}
+        <li class="list-group-item mx-2 my-2" style="border-radius: 500px"><a href="{{ genre.get_absolute_url }}">{{ genre.name }}</a></li>
+        {% endfor %}
+    </ul>
 <table class="table">
     <thead>
         <tr>
