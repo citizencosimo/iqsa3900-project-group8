@@ -7,8 +7,17 @@
 <p>Platform: {{ game.platform.platform_name }}</p>
 <p>Description: {{ game.description }}</p>
 <p>Rating: {{ game.rating }}</p>
-<p>Genre: {{ game.genre.name }}</p>
-<p>Langauge: {{ game.language.name }}</p>
+{#<p>Genre: {{ game.genre.name }}</p>#}
+    <p>Genres:
+    {% for g in game.genre.all %}
+        {{ g }}
+    {% endfor %}
+    </p>
+<p>Langauge:
+    {%  for lang in game.language.all %}
+        {{ lang }}
+    {% endfor %}
+</p>
 {% if game.image %}
     <p>Image: <img src="{{ game.image.url }}" alt="Image" /></p>
 {% else %}
