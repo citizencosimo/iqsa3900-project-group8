@@ -1,8 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="card mb-3 shadow">
+  <div class="card-body">
+    {% block title %}<h2 class="card-title">Edit {{ developer.developer_name }}</h2>{% endblock %}
+    {% if developer.developer_image %}
+      <img class="card-img-top mb-3" src="{{ developer.developer_image }}" alt="Image of {{ developer.developer_name }}">
+    {% else %}
+      <p class="text-muted">No image available</p>
+    {% endif %}
+    <p class="card-text"><strong>Country:</strong> {{ developer.developer_country }}</p>
+    <p class="card-text"><strong>Description:</strong> {{ developer.developer_description }}</p>
+  </div>
+</div>
+{% endblock %}
+
+
+{% comment %} {% extends 'base.html' %}
+{% block content %}
 {% block title %}<h1>{{ developer.developer_name }}</h1>{% endblock %}
 <p>Country: {{ developer.developer_country }}</p>
 <p>Description: {{ developer.developer_description }}</p>
 <p>Image: {{ developer.developer_image }}</p>
-{% endblock %}
+{% endblock %} {% endcomment %}
 

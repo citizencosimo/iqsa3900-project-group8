@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="card mb-3 shadow">
+  <div class="card-body">
+    {% block title %}<h2 class="card-title text-primary">{{ publisher.publisher_name }}</h2>{% endblock %}
+    {% if publisher.publisher_image %}
+      <img class="card-img-top mb-3" src="{{ publisher.publisher_image }}" alt="Image of {{ publisher.publisher_name }}">
+    {% else %}
+      <p class="text-muted">No image available</p>
+    {% endif %}
+    <p class="card-text"><strong>Country:</strong> {{ publisher.publisher_country }}</p>
+    <p class="card-text"><strong>Description:</strong> {{ publisher.publisher_description }}</p>
+  </div>
+</div>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
+{% block content %}
 {% block title %}<h1>{{ publisher.publisher_name }}</h1>{% endblock %}
     <p>Country: {{ publisher.publisher_country }}</p>
     <p>Description: {{ publisher.publisher_description }}</p>
     <p>Image: {{ publisher.publisher_image }}</p>
-{% endblock %}
+{% endblock %} {% endcomment %}
