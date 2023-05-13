@@ -4,9 +4,16 @@ from django.urls import reverse
 
 
 class Language(models.Model):
-    name = models.CharField(max_length=25, default="Unknown")
+    name = models.CharField(
+        max_length=25,
+        # default="Unknown",
+    )
 
-    charset = models.CharField(max_length=100, default="Unknown", help_text="The alphabet used by the language. Currently unused")
+    charset = models.CharField(
+        max_length=100,
+        # default="Unknown",
+        # help_text="The alphabet used by the language. Currently unused",
+    )
 
     def __str__(self):
         return self.name
@@ -16,7 +23,9 @@ class Language(models.Model):
 
 class Genre(models.Model):
     name = models.CharField(
-        max_length=25, help_text="The genre(s) of the game.")
+        max_length=25,
+        #help_text="The genre(s) of the game.",
+    )
     description = models.CharField(max_length=500, blank="True", null="True")
 
     def __str__(self):
@@ -101,7 +110,7 @@ class Game(models.Model):
     )
 
     description = models.TextField(
-        max_length=1000, help_text='Enter a brief description of the game')
+        max_length=1000)
 
     image = models.ImageField(upload_to='game/', blank=True, null=True)
 
