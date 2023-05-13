@@ -17,4 +17,10 @@
   <a href="{% url 'signup' %}">Sign Up</a>
 {% endif %}
 
+<form id="search-form" action="{% url 'fp_search' %}" method="get">
+    <input id="search-input" type="text" name="query">
+    <label><input type="radio" name="field" value="name" checked> Name</label>
+    <label><input type="radio" name="field" value="description"> Description</label>
+</form>
+
 {% endblock %}

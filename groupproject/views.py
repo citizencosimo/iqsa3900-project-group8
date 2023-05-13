@@ -4,7 +4,7 @@ from reviewertools.models import Review
 from .forms import PublisherForm, GameForm, DeveloperForm, GenreForm, PlatformForm, LanguageForm, ImageForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from groupproject.models import Game, Publisher, Developer, Platform, Genre, Language, Image
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -333,3 +333,13 @@ def image_upload_view(request):
     else:
         form = ImageForm()
     return render(request, 'upload.html', {'form': form})
+
+def ModifiedSearchRequest(request):
+    query = request.GET.get('query')
+    field = request.GET.get('field', 'name')
+    result = Game.objects.filter(**{f'{field}__icontains': query})
+    context = {
+        'results': list(result.values()),
+    }
+
+    return JsonResponse(context)
