@@ -1,4 +1,31 @@
 {% extends 'base.html' %}
+{% block content %}
+<div class="card mb-3 shadow">
+  <div class="card-header text-white bg-dark">
+    {% block title %}<h3>Edit Developer</h3>{% endblock %}
+  </div>
+  <div class="card-body">
+    <form enctype="multipart/form-data" method="post" class="mt-4">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}
+            <small id="{{ field.id_for_label }}Help" class="form-text text-muted">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-success">Update</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
 {%  block content %}
 {% block title %}{{ developer.developer_name }}{% endblock %}
     <h1>{{ developer.developer_name }}</h1>
@@ -7,4 +34,4 @@
         <table>{{form.as_table}}</table>
         <button type="submit">Update</button>
     </form>
-{% endblock %}
+{% endblock %} {% endcomment %}
