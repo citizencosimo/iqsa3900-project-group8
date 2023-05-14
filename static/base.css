@@ -1,7 +1,8 @@
 :root {
   --main-bg-color: #171920;
   --main-header-color: #424B54;
-  --accent-1: #f71735;
+  /*--accent-1: #f71735;*/
+  --accent-1: #FF3374;
   --accent-2: #a9b4c2;
   --accent-3: #fdfffc;
 }
@@ -54,7 +55,6 @@ a:link, a:visited {
 
 
 a:hover, a:active {
-
   color: var(--accent-3);
 
 }
@@ -87,18 +87,30 @@ h1.list_head {
 
 }
 
-.search-container {
+div.search-container {
+  /*border: 1px solid black;*/
+  min-width: 800px;
+}
+div.search-container:active {
   /*border: 1px solid black;*/
   min-width: 800px;
 }
 
-.search-input {
-  width: 85%;
+input.search-input {
+  width: 100%;
   margin: 0 auto;
+  background-color: var(--main-bg-color);
+  color: var(--accent-1);
+}
+
+input.search-input:focus {
+  color: var(--accent-1);
+  background-color: var(--main-bg-color);
+  shadow-color: var(--accent-1) !important;
 }
 
 .result-container {
-  width: 85%;
+  width: 100%;
   padding-top: 15px;
   margin: 0 auto;
   /*border: 1px solid black;*/
@@ -107,12 +119,14 @@ h1.list_head {
 .left-row {
   padding-top: 30px;
   margin-right: 10px;
-  min-height: 350px;
+  min-height: 400px;
+  /*min-width: 350px;*/
 }
 
 .right-row {
   margin-left: 10px;
-  min-height: 350px;
+  min-height: 400px;
+  /*min-width: 350px;*/
 }
 
 .summary-card {
@@ -121,15 +135,56 @@ h1.list_head {
 }
 
 .summary-title {
-  background-color: #424B54;
-  color: var(--accent-2) !important;
+  background-color: var(--main-bg-color);
+  color: var(--accent-1) !important;
   padding: .8rem 1rem;
   margin: auto 0;
-  border-radius: 0.25rem;
+  border-radius: 2px;
   display: block;
   width: 100%;
+  min-height: 65px;
 }
 
 .remove-margin {
   margin: 0 0 0 0 !important
 }
+
+div.gor-dropdown {
+  margin-top: 10px;
+  border: 2px var(--accent-2) solid;
+  background-color: var(--main-bg-color);
+}
+
+a.gor-link {
+  font-size: smaller;
+  color: var(--accent-1);
+}
+
+a.gor-link:hover {
+  color: var(--accent-3);
+  background-color: var(--main-bg-color);
+}
+
+div.content-wrap {
+  padding-top: 40px;
+}
+
+div.gor-card {
+  border: solid 2px var(--main-bg-color);
+  background-color: var(--accent-2);
+}
+
+div.gor-card a {
+  text-decoration: none;
+  color: var(--main-header-color);
+  font-weight: bolder;
+}
+
+div.gor-card a:hover {
+  background-color: var(--main-header-color);
+  color: var(--accent-1);
+  padding: 4px 40px 4px 4px;
+  border: 1.5px var(--main-bg-color) solid;
+  border-radius: 4px;
+}
+

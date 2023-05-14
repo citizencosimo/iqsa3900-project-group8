@@ -7,12 +7,16 @@ function getSummary(id) {
         data: {'id': id},
         dataType: 'json',
         success: function(response) {
+            $('#title-card').empty()
+            $('#title-card').append(
+                response.title
+            )
             $('#summary-panel').empty()
             $('#summary-panel').append(
-                '<div class="card-body" style="padding: 0 0 0 0">  ' +
-                    '<h2 class="card-title text-primary summary-title">' + response.title + '</h2>' +
-                        '<div>' + response.release_date + '</div>' +
-                '</div>'
+                // '<div class="card-body" style="padding: 0 0 0 0">  ' +
+                //     '<h2 class="card-title text-primary summary-title">' + response.title + '</h2>' +
+                //         '<div>' + response.release_date + '</div>' +
+                // '</div>'
             )
 
         },
