@@ -1,5 +1,14 @@
 var searchTimeout = null;
 
+/* Prevents the enter key from navigating to the raw JSON string when using live search. */
+const searchbar = document.getElementById('search-input');
+searchbar.addEventListener("keydown", function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+    }
+});
+
+/* Displays the game information when a search result is clicked. */
 function getSummary(id) {
     $.ajax({
         type: 'GET',
@@ -7,17 +16,26 @@ function getSummary(id) {
         data: {'id': id},
         dataType: 'json',
         success: function(response) {
-            $('#title-card').empty()
+            $('#title-card').empty();
             $('#title-card').append(
-                response.title
-            )
-            $('#summary-panel').empty()
-            $('#summary-panel').append(
-                // '<div class="card-body" style="padding: 0 0 0 0">  ' +
-                //     '<h2 class="card-title text-primary summary-title">' + response.title + '</h2>' +
-                //         '<div>' + response.release_date + '</div>' +
-                // '</div>'
-            )
+                response.title + '<span class="title-card-rating">Rating: ' + response.rating + '</span>'
+            );
+            console.log(response.developer);
+            document.getElementById('toggled-game-view').style.display = 'inline'
+            $('#dev-data').empty();
+            $('#dev-data').append(
+                response.developer
+            );
+            console.log(response.publisher);
+            $('#publisher-data').empty();
+            $('#publisher-data').append(
+                response.publisher
+            );
+            console.log(response.gamesum);
+            $('#summary-data').empty();
+            $('#summary-data').append(
+                response.gamesum
+            );
 
         },
         error: function (response) {
@@ -25,6 +43,11 @@ function getSummary(id) {
         }
     })
 }
+
+/* Function to perform a live search when entering a string into the input. Debouncer employed
+* to prevent excessive db calls. */
+
+const debounce_timer = 100 /* ms */
 $(document).ready(function() {
 
     $('#search-input').on('keyup', function() {
@@ -36,7 +59,7 @@ $(document).ready(function() {
             clearTimeout(searchTimeout);
         }
 
-        if (query.length >= 3) { // check if input length is at least 3
+        if (query.length >= 3) { // check if input length is at least 3. Prevents search for single letters.
             searchTimeout = setTimeout(function() {
                 $.ajax({
                     type: 'GET',
@@ -57,7 +80,7 @@ $(document).ready(function() {
                         console.log('Error:', response);
                     }
                 });
-            }, 100);
+            }, debounce_timer);
         } else {
             $('#search-results').empty();
         }

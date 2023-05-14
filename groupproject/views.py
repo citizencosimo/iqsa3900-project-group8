@@ -357,7 +357,7 @@ def HomePageDetailView(request):
             'publisher': str(result.publisher),
             'developer': str(result.developer),
             'rating': result.rating,
-            'details': result.description,
+            'gamesum': result.description,
             'release_date': str(result.release_date)
         }
     return JsonResponse(context)

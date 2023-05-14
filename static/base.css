@@ -1,14 +1,16 @@
 :root {
   --main-bg-color: #171920;
   --main-header-color: #424B54;
-  /*--accent-1: #f71735;*/
   --accent-1: #FF3374;
   --accent-2: #a9b4c2;
   --accent-3: #fdfffc;
+  --t-accent-2: rgba(169, 180, 194, 0.6);
 }
 
 body {
   background-color: var(--main-header-color);
+  background: url('../static/site-images/bg.jpg');
+  color: var(--main-header-color);
   font-size: 10pt;
   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   color: var(--accent-3);
@@ -16,9 +18,15 @@ body {
 
 }
 
+div.form-group label {
+  color: var(--main-header-color);
+}
+
 header.gor-header {
+  z-index: 9999 !important;
   color: var(--accent-2);
   background-color: var(--main-bg-color);
+  opacity: 0.9;
 }
 
 h1 {
@@ -32,10 +40,10 @@ span.icon-accent {
 }
 
 
-p.subheader {
-  font-weight: bold;
-  color: #593d87;
-}
+/*p.subheader {*/
+/*  font-weight: bold;*/
+/*  color: #593d87;*/
+/*}*/
 
 
 img {
@@ -61,17 +69,11 @@ a:hover, a:active {
 
 
 footer.footer {
-
   background-color: var(--main-bg-color);
-
   font-size: 9pt;
-
   font-style: italic;
-
   line-height: 12pt;
-
   text-align: center;
-
   padding-top: 30pt;
 
 }
@@ -111,8 +113,9 @@ input.search-input:focus {
 
 .result-container {
   width: 100%;
-  padding-top: 15px;
+  padding-top: 30px;
   margin: 0 auto;
+  max-height: 400px;
   /*border: 1px solid black;*/
 }
 
@@ -120,6 +123,8 @@ input.search-input:focus {
   padding-top: 30px;
   margin-right: 10px;
   min-height: 400px;
+  max-height: 400px;
+  overflow: auto;
   /*min-width: 350px;*/
 }
 
@@ -156,6 +161,7 @@ div.gor-dropdown {
 }
 
 a.gor-link {
+
   font-size: smaller;
   color: var(--accent-1);
 }
@@ -171,20 +177,66 @@ div.content-wrap {
 
 div.gor-card {
   border: solid 2px var(--main-bg-color);
-  background-color: var(--accent-2);
+  background-color: var(--t-accent-2);
+  overflow: auto;
+
 }
 
 div.gor-card a {
+  font-size: 1.1em;
   text-decoration: none;
-  color: var(--main-header-color);
+  color: var(--main-bg-color);
   font-weight: bolder;
 }
 
 div.gor-card a:hover {
+  font-weight: lighter !important;
   background-color: var(--main-header-color);
   color: var(--accent-1);
   padding: 4px 40px 4px 4px;
   border: 1.5px var(--main-bg-color) solid;
   border-radius: 4px;
+}
+
+span.title-card-rating {
+  padding-top: 12px;
+  font-size: 16px;
+  color: var(--accent-2);
+  display: flex;
+  float: right;
+}
+
+div.gor-game-details {
+  display: none;
+  color: var(--main-bg-color);
+  font-weight: bold;
+}
+
+.gor-panel-buttons {
+  padding-top: 50px;
+  position: relative;
+  text-align: center;
+}
+
+.panel-btn {
+  display: flex;
+  background: var(--main-bg-color);
+  color: var(--accent-1);
+  border-color: var(--accent-1);
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.panel-btn:focus, .panel-button:active:focus {
+  background: var(--main-header-color) !important;
+  outline: thin solid;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.panel-btn:hover, .panel-btn:focus  {
+  /*background: var(--main-bg-color);*/
+  border-color: var(--accent-1);
+  color: var(--accent-3);
 }
 
