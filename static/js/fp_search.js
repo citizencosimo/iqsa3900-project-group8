@@ -8,7 +8,13 @@ function getSummary(id) {
         dataType: 'json',
         success: function(response) {
             $('#summary-panel').empty()
-            console.log(response.publisher)
+            $('#summary-panel').append(
+                '<div class="card-body" style="padding: 0 0 0 0">  ' +
+                    '<h2 class="card-title text-primary summary-title">' + response.title + '</h2>' +
+                        '<div>' + response.release_date + '</div>' +
+                '</div>'
+            )
+
         },
         error: function (response) {
             console.log('Error:', response);
@@ -26,26 +32,30 @@ $(document).ready(function() {
             clearTimeout(searchTimeout);
         }
 
-        searchTimeout = setTimeout(function() {
-            $.ajax({
-                type: 'GET',
-                url: url,
-                data: {'query': query},
-                dataType: 'json',
-                success: function (response) {
-                    $('#search-results').empty();
-                    var results = response.results;
-                    console.log(results)
-                    for (var i = 0; i < results.length; i++) {
-                        $('#search-results').append(
-                        '<p><a href="#" onclick="getSummary(' + response.string[i][1] + ')">' + response.string[i][0] + '</a></p>'
-                        );
+        if (query.length >= 3) { // check if input length is at least 3
+            searchTimeout = setTimeout(function() {
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: {'query': query},
+                    dataType: 'json',
+                    success: function (response) {
+                        $('#search-results').empty();
+                        var results = response.results;
+                        console.log(results)
+                        for (var i = 0; i < results.length; i++) {
+                            $('#search-results').append(
+                            '<p><a href="#" onclick="getSummary(' + response.string[i][1] + ')">' + response.string[i][0] + '</a></p>'
+                            );
+                        }
+                    },
+                    error: function (response) {
+                        console.log('Error:', response);
                     }
-                },
-                error: function (response) {
-                    console.log('Error:', response);
-                }
-            });
-        }, 100);
+                });
+            }, 100);
+        } else {
+            $('#search-results').empty();
+        }
     });
 });
