@@ -1,26 +1,60 @@
 {% extends "base.html" %}
 
+{%  load static %}
+
 {% block title %}Home{% endblock %}
 
 {% block content %}
 
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-    {% if user.is_staff %}
-        <br><a href='{% url 'database_links' %}'>Database Tools</a>
-    {% endif %}
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+    <div class="search-container container">
+      <div class="row justify-content-center">
+        <div class="col">
+            <form id="search-form" action="{% url 'fp_search' %}" method="get">
+              <input class="form-control search-input" id="search-input" type="text" name="query" placeholder="Search">
+            </form>
+        </div>
+      </div>
+        <div class="row justify-content-center result-container">
+            <div class="col">
+                <div id="search-results">
+                    <!-- results will be displayed here -->
+                </div>
+            </div>
+            <div class="col">
+                <div id="summary-panel">
+                    <!-- results will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
 
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a> |
-  <a href="{% url 'signup' %}">Sign Up</a>
-{% endif %}
+
+
+{#{% if user.is_authenticated %}#}
+{#  Hi {{ user.username }}!#}
+{#    {% if user.is_staff %}#}
+{#        <br><a href='{% url 'database_links' %}'>Database Tools</a>#}
+{#    {% endif %}#}
+{#  <p><a href="{% url 'logout' %}">Log Out</a></p>#}
+{##}
+{#{% else %}#}
+{#  <p>You are not logged in</p>#}
+{#  <a href="{% url 'login' %}">Log In</a> |#}
+{#  <a href="{% url 'signup' %}">Sign Up</a>#}
+{#{% endif %}#}
 
 {#<form id="search-form" action="{% url 'fp_search' %}" method="get">#}
 {#    <input id="search-input" type="text" name="query">#}
-{#    <label><input type="radio" name="field" value="name" checked> Name</label>#}
+{#    <label><input type="radio" name="field" value="title" checked> Title</label>#}
 {#    <label><input type="radio" name="field" value="description"> Description</label>#}
 {#</form>#}
+<div id="search-results">
+    <!-- results will be displayed here -->
+</div>
+
+
+
+
+<script src="{% static 'js/fp_search.js' %}"></script>
 
 {% endblock %}

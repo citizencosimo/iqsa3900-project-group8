@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     #Database top
     path('', views.DatabaseLinks, name='database_links'),
+    path('fpsearch/', views.ModifiedSearchRequest, name='fp_search'),
+    path('getsummary/', views.HomePageDetailView, name='get_summary'),
 
     #List views:
     path('developers', views.DeveloperList, name="developer_list"),

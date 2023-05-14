@@ -335,11 +335,30 @@ def image_upload_view(request):
     return render(request, 'upload.html', {'form': form})
 
 def ModifiedSearchRequest(request):
+    context = {}
     query = request.GET.get('query')
-    field = request.GET.get('field', 'name')
-    result = Game.objects.filter(**{f'{field}__icontains': query})
-    context = {
-        'results': list(result.values()),
-    }
+    if query != "":
+        result = Game.objects.filter(title__contains=query)
+        context['results'] = list(result.values())
+        context['string'] = [(game.__str__(), game.pk) for game in result]
+    else:
+        context['results'] = []
 
     return JsonResponse(context)
+
+def HomePageDetailView(request):
+    context = {}
+    query = request.GET.get('id')
+    result = get_object_or_404(Game, pk=query)
+    # print(result.__str__())
+    if result:
+        context = {
+            'title': result.title,
+            'publisher': str(result.publisher),
+            'developer': str(result.developer),
+            'rating': result.rating,
+            'details': result.description,
+            'release_date': str(result.release_date)
+        }
+    return JsonResponse(context)
+

@@ -4,6 +4,8 @@ body {
 }
 
 .navbar {
+    border: solid white 2px;
+    border-radius: 4px;
     background-color: #343a40;
     color: #fff;
 }

@@ -86,3 +86,20 @@ h1.list_head {
 
 
 }
+
+.search-container {
+  /*border: 1px solid black;*/
+  min-width: 800px;
+}
+
+.search-input {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.result-container {
+  width: 85%;
+  padding-top: 15px;
+  margin: 0 auto;
+  /*border: 1px solid black;*/
+}
