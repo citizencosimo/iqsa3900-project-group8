@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="card mb-3 shadow">
-  <div class="card-body">
-    <h2 class="card-title text-primary">{{ game.title }}</h2>
+<div class="card mb-3 shadow gor-card">
+  <div class="card-body" style="padding: 0 0 0 0">
+    <h2 class="card-title text-primary summary-title">{{ game.title }}</h2>
     {% if game.image %}
       <img class="card-img-top mb-3" src="{{ game.image.url }}" alt="Image">
     {% else %}
@@ -31,12 +31,12 @@
   <a href={% url 'write_review' game_id=game.pk %} class="btn btn-primary mb-3">Write a Review</a>
   {% for r in reviews %}
     <hr>
-    <div class="jumbotron">
+    <div class="jumbotron gor-card">
       {% if r.is_flagged %}
         <p class="lead text-danger">THIS REVIEW IS FLAGGED PENDING REVIEW</p>
       {% endif %}
       <p class="lead"><em>{{ r.user.username }} writes...</em></p>
-      <h3 class="display-4">{{ r.description }}</h3>
+      <h3 class="display-4 review-title">{{ r.description }}</h3>
       <p>{{ r.comment }}</p>
       {% if request.user.username == r.user.username %}
         <a href="{%  url 'update_review' review_id=r.pk %}" class="btn btn-warning">Edit</a>

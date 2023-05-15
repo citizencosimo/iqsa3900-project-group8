@@ -10,6 +10,9 @@
 body {
   background-color: var(--main-header-color);
   background: url('../static/site-images/bg.jpg');
+  background-attachment: scroll;
+  background-size: cover;
+  background-attachment: fixed;
   color: var(--main-header-color);
   font-size: 10pt;
   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
@@ -212,10 +215,14 @@ div.gor-game-details {
   font-weight: bold;
 }
 
-.gor-panel-buttons {
+.gor-panel-buttons{
   padding-top: 50px;
-  position: relative;
-  text-align: center;
+  /*position: relative;*/
+  /*text-align: center;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .panel-btn {
@@ -239,4 +246,17 @@ div.gor-game-details {
   border-color: var(--accent-1);
   color: var(--accent-3);
 }
+
+li.login-links {
+  padding-top: 5px;
+  list-style-type: none;
+  padding-right: 10px;
+}
+
+a.login-links {
+  font-size: 1em;
+  text-decoration: none;
+  padding-right: 5px;
+}
+
 

@@ -20,23 +20,25 @@ function getSummary(id) {
             $('#title-card').append(
                 response.title + '<span class="title-card-rating">Rating: ' + response.rating + '</span>'
             );
-            console.log(response.developer);
             document.getElementById('toggled-game-view').style.display = 'inline'
             $('#dev-data').empty();
             $('#dev-data').append(
                 response.developer
             );
-            console.log(response.publisher);
             $('#publisher-data').empty();
             $('#publisher-data').append(
                 response.publisher
             );
-            console.log(response.gamesum);
             $('#summary-data').empty();
             $('#summary-data').append(
                 response.gamesum
             );
-
+            const form_review = document.getElementById('review_link');
+            form_review.action = `/data/view_game/${response.gameid}`;
+            const form_edit = document.getElementById('edit_link');
+            form_edit.action = `/data/update_game/${response.gameid}`;
+            const form_write = document.getElementById('write_link');
+            form_write.action = `/data/review/write_review/${response.gameid}`;
         },
         error: function (response) {
             console.log('Error:', response);

@@ -353,6 +353,7 @@ def HomePageDetailView(request):
     # print(result.__str__())
     if result:
         context = {
+            'gameid' : result.pk,
             'title': result.title,
             'publisher': str(result.publisher),
             'developer': str(result.developer),
