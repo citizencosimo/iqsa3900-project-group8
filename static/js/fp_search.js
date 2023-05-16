@@ -11,7 +11,7 @@ searchbar.addEventListener("keydown", function(event) {
 /* Displays the game information when a search result is clicked. */
 function getSummary(id) {
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: '/data/getsummary/',
         data: {'id': id},
         dataType: 'json',
@@ -64,7 +64,7 @@ $(document).ready(function() {
         if (query.length >= 3) { // check if input length is at least 3. Prevents search for single letters.
             searchTimeout = setTimeout(function() {
                 $.ajax({
-                    type: 'POST',
+                    type: 'GET',
                     url: url,
                     data: {'query': query},
                     dataType: 'json',

@@ -5,7 +5,7 @@
     <h2 class="card-title text-primary summary-title">{{ game.title }}</h2>
     {% if game.image %}
         <div class="gor-card-img">
-            <img src="{{ game.image.url }}" alt="Image">
+            <img src="{{ game.image.url }}" alt="Image" class="img-thumbnail">
         </div>
     {% else %}
       <p class="text-muted">No image available</p>
