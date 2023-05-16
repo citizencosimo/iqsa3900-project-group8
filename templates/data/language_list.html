@@ -1,4 +1,29 @@
 {% extends 'base.html' %}
+{% block title %}View All Languages{% endblock %}
+{% block content %}
+<a href="{% url 'add_language' %}" class="btn mb-3 panel-btn">Add a language</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for language in languages %}
+        <tr>
+            <td><a href="{{ language.get_absolute_url }}" class="text-primary">{{ language.name }}</a></td>
+            <td><a href="{% url 'update_language' pk=language.pk %}" class="btn btn-primary">Update</a></td>
+            <td><a href="{% url 'delete_language' pk=language.pk %}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
 {%  block content %}
 {% block title %}View All Languages{% endblock %}
 <a href='{% url 'add_language' %}'>Add a language</a>
@@ -21,4 +46,4 @@
         {% endfor %}
     </tbody>
 </table>
-{%  endblock %}
+{%  endblock %} {% endcomment %}

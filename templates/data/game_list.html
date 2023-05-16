@@ -1,4 +1,29 @@
 {% extends 'base.html' %}
+{% block title %}View All Games{% endblock %}
+{% block content %}
+<a href='{% url 'add_game' %}' class="btn mb-3 panel-btn">Add a game</a>
+
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in games %}
+        <tr>
+            <td><a href="{{ game.get_absolute_url }}" class="text-primary">{{ game.title }}</a></td>
+            <td><a href="{% url 'update_game' pk=game.pk %}" class="btn btn-primary">Update</a></td>
+            <td><a href="{% url 'delete_game' pk=game.pk %}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
 {%  block content %}
 {% block title %}View All Games{% endblock %}
 <a href='{% url 'add_game' %}'>Add a game</a>
@@ -21,4 +46,4 @@
         {% endfor %}
     </tbody>
 </table>
-{%  endblock %}
+{%  endblock %} {% endcomment %}

@@ -1,15 +1,91 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="card mb-3 shadow gor-card">
+  <div class="card-body gor-card-body" style="padding: 0 0 0 0">
+    <h2 class="card-title text-primary summary-title">{{ game.title }}</h2>
+    {% if game.image %}
+        <div class="gor-card-img">
+            <img src="{{ game.image.url }}" alt="Image" class="img-thumbnail">
+        </div>
+    {% else %}
+      <p class="text-muted">No image available</p>
+    {% endif %}
+    <p class="card-text"><strong>Publisher:</strong> {{ game.publisher }}</p>
+    <p class="card-text"><strong>Developer:</strong> {{ game.developer }}</p>
+    <p class="card-text"><strong>Release Date:</strong> {{ game.release_date }}</p>
+    <p class="card-text"><strong>Platform:</strong> {{ game.platform.platform_name }}</p>
+    <p class="card-text"><strong>Description:</strong> {{ game.description }}</p>
+    <p class="card-text"><strong>Rating:</strong> {{ game.rating }}</p>
+    <p class="card-text"><strong>Genres:</strong>
+      {% for g in game.genre.all %}
+        <span class="badge badge-secondary">{{ g }}</span>
+      {% endfor %}
+    </p>
+    <p class="card-text"><strong>Language:</strong>
+      {% for lang in game.language.all %}
+        <span class="badge badge-secondary">{{ lang }}</span>
+      {% endfor %}
+    </p>
+  <br>
+  </div>
+</div>
+
+{% if reviews %}
+  <a href="{% url 'write_review' game_id=game.pk %}" class="btn mb-3 panel-btn">Write a Review</a>
+  {% for r in reviews %}
+    <hr>
+    <div class="jumbotron gor-card">
+      {% if r.is_flagged %}
+        <p class="lead text-danger">THIS REVIEW IS FLAGGED PENDING REVIEW</p>
+      {% endif %}
+      <p class="lead"><em>{{ r.user.username }} writes...</em></p>
+      <h3 class="display-4 review-title">{{ r.description }}</h3>
+      <p>{{ r.comment }}</p>
+      {% if request.user.username == r.user.username %}
+          <form action="{%  url 'update_review' review_id=r.pk %}">
+              <button type="submit" class="btn mb3 panel-btn">Edit</button>
+          </form>
+      {% else %}
+          <form action="{%  url 'report_review' review_id=r.pk %}">
+              <button type="submit" class="btn mb3 panel-btn">Report</button>
+          </form>
+      {% endif %}
+    </div>
+  {% endfor %}
+{%  else %}
+  <div class="alert alert-warning" role="alert">
+    NO REVIEWS YET. <a href="{%  url 'write_review' game_id=game.pk %}" class="alert-link">Why not be the first?</a>
+  </div>
+{% endif %}
+
+{% endblock %}
+
+
+{% comment %} {% extends 'base.html' %}
+{% block content %}
 {% block title %}{{ game.title }}{% endblock %}
 <p>Publisher: {{ game.publisher }}</p>
 <p>Developer: {{ game.developer }}</p>
 <p>Release Date: {{ game.release_date }}</p>
-<p>Platform: {{ game.plaftform }}</p>
+<p>Platform: {{ game.platform.platform_name }}</p>
 <p>Description: {{ game.description }}</p>
 <p>Rating: {{ game.rating }}</p>
-<p>Genre: {{ game.genre }}</p>
-<p>Langauge: {{ game.langauge }}</p>
-<p>Image: {{ game.image }}</p>
+{#<p>Genre: {{ game.genre.name }}</p>#}
+    <p>Genres:
+    {% for g in game.genre.all %}
+        {{ g }}
+    {% endfor %}
+    </p>
+<p>Langauge:
+    {%  for lang in game.language.all %}
+        {{ lang }}
+    {% endfor %}
+</p>
+{% if game.image %}
+    <p>Image: <img src="{{ game.image.url }}" alt="Image" /></p>
+{% else %}
+    <p>No image available</p>
+{% endif %}
     {% if reviews %}
         <a href={% url 'write_review' game_id=game.pk %}>Write a Review</a>
         {% for r in reviews %}
@@ -33,4 +109,4 @@
         NO REVIEWS YET. <a href="{%  url 'write_review' game_id=game.pk %}">Why not be the first?</a>
     {% endif %}
 
-{% endblock %}
+{% endblock %} {% endcomment %}

@@ -1,0 +1,28 @@
+body {
+    background-color: #242424;
+    color: #fff;
+}
+
+.navbar {
+    border: solid white 2px;
+    border-radius: 4px;
+    background-color: #343a40;
+    color: #fff;
+}
+
+.navbar a {
+    color: #fff;
+}
+
+.navbar a:hover {
+    color: #ddd;
+}
+
+.footer {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.alert {
+    color: #343a40;
+}

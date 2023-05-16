@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="card mb-3 shadow">
+  <div class="card-body">
+    {% block title %}<h2 class="card-title text-primary">{{ platform.platform_name }}</h2>{% endblock %}
+    {% if platform.platform_image %}
+      <img class="card-img-top mb-3" src="{{ platform.platform_image }}" alt="Image of {{ platform.platform_name }}">
+    {% else %}
+      <p class="text-muted">No image available</p>
+    {% endif %}
+    <p class="card-text"><strong>Description:</strong> {{ platform.platform_description }}</p>
+  </div>
+</div>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
+{% block content %}
 {% block title %}<h1>{{ platform.platform_name }}</h1>{% endblock %}
     <p>Description: {{ platform.platform_description }}</p>
     <p>Image: {{ platform.platform_image }}</p>
-{% endblock %}
+{% endblock %} {% endcomment %}

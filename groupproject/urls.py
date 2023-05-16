@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     #Database top
     path('', views.DatabaseLinks, name='database_links'),
+    path('fpsearch/', views.ModifiedSearchRequest, name='fp_search'),
+    path('getsummary/', views.HomePageDetailView, name='get_summary'),
 
     #List views:
     path('developers', views.DeveloperList, name="developer_list"),
@@ -12,6 +14,7 @@ urlpatterns = [
     path('languages/', views.LanguageList, name='language_list'),
     path('platforms', views.PlatformList, name="platform_list"),
     path('publishers', views.PublisherList, name="publisher_list"),
+    path('upload/', views.image_upload_view, name='image_upload'),
 
     #Individual Views
     path('view_developer/<int:pk>', views.ViewDeveloper, name='developer_view'),
@@ -45,4 +48,4 @@ urlpatterns = [
 
     #Review Include
     path('review/', include('reviewertools.urls')),
-]
+] 

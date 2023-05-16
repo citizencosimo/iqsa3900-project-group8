@@ -1,12 +1,37 @@
+import os
+import uuid
+
 from accounts.models import CustomUser
 from django.db import models
 from django.urls import reverse
+from django.core.files.storage import FileSystemStorage
+
+
+def generate_unique_filename(instance, filename):
+    print("I AM BEING CALLED")
+    extension = filename.split('.')[-1]
+    new_filename = f"{uuid.uuid4().hex}.{extension}"
+    return os.path.join('images/', new_filename)
+
+class CustomFileSystemStorage(FileSystemStorage):
+    def __init__(self, *args, **kwargs):
+        print("I AM ALSO BEING CALLED")
+        super().__init__(*args, **kwargs)
+        if not os.path.exists(self.location):
+            os.makedirs(self.location)
 
 
 class Language(models.Model):
-    name = models.CharField(max_length=25, default="Unknown")
+    name = models.CharField(
+        max_length=25,
+        # default="Unknown",
+    )
 
-    charset = models.CharField(max_length=100, default="Unknown", help_text="The alphabet used by the language. Currently unused")
+    charset = models.CharField(
+        max_length=100,
+        # default="Unknown",
+        # help_text="The alphabet used by the language. Currently unused",
+    )
 
     def __str__(self):
         return self.name
@@ -16,7 +41,9 @@ class Language(models.Model):
 
 class Genre(models.Model):
     name = models.CharField(
-        max_length=25, help_text="The genre(s) of the game.")
+        max_length=25,
+        #help_text="The genre(s) of the game.",
+    )
     description = models.CharField(max_length=500, blank="True", null="True")
 
     def __str__(self):
@@ -29,7 +56,7 @@ class Genre(models.Model):
 class Publisher(models.Model):
     publisher_name = models.CharField(max_length=1000)
     publisher_image = models.ImageField(
-        upload_to='images/', null=True, blank=True)
+        upload_to='publiser/', null=True, blank=True)
     publisher_country = models.CharField(max_length=500)
     publisher_description = models.CharField(max_length=1000)
 
@@ -42,7 +69,7 @@ class Publisher(models.Model):
 class Developer(models.Model):
     developer_name = models.CharField(max_length=1000)
     developer_image = models.ImageField(
-        upload_to='images/', blank=True, null=True)
+        upload_to='developer/', blank=True, null=True)
     developer_country = models.CharField(max_length=500)
     developer_description = models.CharField(max_length=1000)
 
@@ -57,7 +84,7 @@ class Developer(models.Model):
 class Platform(models.Model):
     platform_name = models.CharField(max_length=25)
     platform_image = models.ImageField(
-        upload_to='images/', blank=True, null=True)
+        upload_to='platform/', blank=True, null=True)
     platform_description = models.CharField(max_length=1000)
 
     def __str__(self):
@@ -101,9 +128,9 @@ class Game(models.Model):
     )
 
     description = models.TextField(
-        max_length=1000, help_text='Enter a brief description of the game')
+        max_length=1000)
 
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    image = models.ImageField(upload_to=generate_unique_filename, storage=CustomFileSystemStorage(), blank=True, null=True)
 
     class Meta:
         ordering = ['title', 'platform', 'release_date']
@@ -112,6 +139,13 @@ class Game(models.Model):
         return self.title + ' (' + self.platform.platform_name + ', ' + str(self.release_date.year) + ')'
     def get_absolute_url(self):
         return reverse('game_view', args=str(self.pk))
+    
+class Image(models.Model):
+    image = models.ImageField(upload_to='images/')
+    title = models.CharField(max_length=200, blank=True)
+
+    def __str__(self):
+        return self.title
 
 
 

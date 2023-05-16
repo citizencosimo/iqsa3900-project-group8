@@ -1,20 +1,71 @@
 {% extends "base.html" %}
 
+{%  load static %}
+
 {% block title %}Home{% endblock %}
 
 {% block content %}
 
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-    {% if user.is_staff %}
-        <br><a href='{% url 'database_links' %}'>Database Tools</a>
-    {% endif %}
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+    <div class="container search-container">
+      <div class="row justify-content-center">
+        <div class="col">
+            <form id="search-form" action="{% url 'fp_search' %}" method="get">
+              <input class="form-control search-input" id="search-input" type="text" name="query" placeholder="Start typing to search for a game...">
+            </form>
+        </div>
+      </div>
+        <div class="row justify-content-center result-container">
+            <div class="col card mb-3 shadow left-row gor-card" style="padding:0 0 0 0">
+                <h2 class="card-title text-primary summary-title">Search Results</h2>
+                <div id="search-results" class="card-body">
+                    <!-- results will be displayed here -->
+                </div>
+            </div>
+            <div class="col card mb-3 shadow right-row summary-card gor-card" style="padding: 0 0 0 0">
+                <h2 id="title-card" class="card-title text-primary summary-title"></h2>
+                <div id="summary-panel" class="card-body">
+                    <div class="gor-game-details" id="toggled-game-view">
+                        <p class="summary-inner-text">Developer: <span id="dev-data"></span></p>
+                        <p class="summary-inner-text">Publisher: <span id="publisher-data"></span></p>
+                        <p class="summary-inner-text">Description: <span id="summary-data"></span></p>
+                        <div class="gor-panel-buttons">
+                            <form id="review_link"><button type="submit" class="btn panel-btn">See Reviews</button></form>
+                            <form id="edit_link"><button type="submit" class="btn panel-btn">Edit Game</button></form>
+                            <form id="write_link"><button type="submit" class="btn panel-btn">Write Review</button></form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a> |
-  <a href="{% url 'signup' %}">Sign Up</a>
-{% endif %}
+
+
+{#{% if user.is_authenticated %}#}
+{#  Hi {{ user.username }}!#}
+{#    {% if user.is_staff %}#}
+{#        <br><a href='{% url 'database_links' %}'>Database Tools</a>#}
+{#    {% endif %}#}
+{#  <p><a href="{% url 'logout' %}">Log Out</a></p>#}
+{##}
+{#{% else %}#}
+{#  <p>You are not logged in</p>#}
+{#  <a href="{% url 'login' %}">Log In</a> |#}
+{#  <a href="{% url 'signup' %}">Sign Up</a>#}
+{#{% endif %}#}
+
+{#<form id="search-form" action="{% url 'fp_search' %}" method="get">#}
+{#    <input id="search-input" type="text" name="query">#}
+{#    <label><input type="radio" name="field" value="title" checked> Title</label>#}
+{#    <label><input type="radio" name="field" value="description"> Description</label>#}
+{#</form>#}
+<div id="search-results">
+    <!-- results will be displayed here -->
+</div>
+
+
+
+
+<script src="{% static 'js/fp_search.js' %}"></script>
 
 {% endblock %}

@@ -1,12 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
-
 from reviewertools.models import Review
-from .forms import PublisherForm, GameForm, DeveloperForm, GenreForm, PlatformForm, LanguageForm
+from .forms import PublisherForm, GameForm, DeveloperForm, GenreForm, PlatformForm, LanguageForm, ImageForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
-from django.http import HttpResponse, HttpResponseRedirect
-from groupproject.models import Game, Publisher, Developer, Platform, Genre, Language
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from groupproject.models import Game, Publisher, Developer, Platform, Genre, Language, Image
 from django.urls import reverse_lazy
 from django.contrib import messages
 
@@ -35,7 +34,7 @@ def CreatePublisher(request):
         messages.success(request, 'Successfully Added')
         return redirect('publisher_list')
     context['form'] = form
-    return render(request, 'data/forms/publisher_a.html', context)
+    return render(request, 'data/forms/add_publisher.html', context)
 
 
 def CreateDeveloper(request):
@@ -184,7 +183,7 @@ def UpdateGame(request, pk, template_name='data/game/update.html'):
     context = {}
     game = get_object_or_404(Game, pk=pk)
     context['game'] = game
-    form = GameForm(request.POST or None, instance=game)
+    form = GameForm(request.POST or None, request.FILES or None, instance=game)
     context['form'] = form
     if form.is_valid():
         form.save()
@@ -323,3 +322,44 @@ def PlatformList(request, template_name='data/platform_list.html'):
     data = {}
     data['objects_list'] = platforms
     return render(request, template_name, data)
+
+def image_upload_view(request):
+    """Image upload view."""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = ImageForm()
+    return render(request, 'upload.html', {'form': form})
+
+def ModifiedSearchRequest(request):
+    context = {}
+    query = request.GET.get('query')
+    if query != "":
+        result = Game.objects.filter(title__contains=query)
+        context['results'] = list(result.values())
+        context['string'] = [(game.__str__(), game.pk) for game in result]
+    else:
+        context['results'] = []
+
+    return JsonResponse(context)
+
+def HomePageDetailView(request):
+    context = {}
+    query = request.GET.get('id')
+    result = get_object_or_404(Game, pk=query)
+    # print(result.__str__())
+    if result:
+        context = {
+            'gameid' : result.pk,
+            'title': result.title,
+            'publisher': str(result.publisher),
+            'developer': str(result.developer),
+            'rating': result.rating,
+            'gamesum': result.description,
+            'release_date': str(result.release_date)
+        }
+    return JsonResponse(context)
+
