@@ -42,9 +42,13 @@
       <h3 class="display-4 review-title">{{ r.description }}</h3>
       <p>{{ r.comment }}</p>
       {% if request.user.username == r.user.username %}
-        <button action="{%  url 'update_review' review_id=r.pk %}" class="btn panel-btn">Edit</button>
+          <form action="{%  url 'update_review' review_id=r.pk %}">
+              <button type="submit" class="btn mb3 panel-btn">Edit</button>
+          </form>
       {% else %}
-        <button action="{%  url 'report_review' review_id=r.pk %}" class="btn panel-btn">Report</button>
+          <form action="{%  url 'report_review' review_id=r.pk %}">
+              <button type="submit" class="btn mb3 panel-btn">Report</button>
+          </form>
       {% endif %}
     </div>
   {% endfor %}
