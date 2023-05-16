@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import path, include
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, RedirectView
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('site-images/favicon.ico'))),
     # forgot password - reset
     path(
         'password_reset/',
