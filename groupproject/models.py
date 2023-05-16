@@ -1,6 +1,24 @@
+import os
+import uuid
+
 from accounts.models import CustomUser
 from django.db import models
 from django.urls import reverse
+from django.core.files.storage import FileSystemStorage
+
+
+def generate_unique_filename(instance, filename):
+    print("I AM BEING CALLED")
+    extension = filename.split('.')[-1]
+    new_filename = f"{uuid.uuid4().hex}.{extension}"
+    return os.path.join('images/', new_filename)
+
+class CustomFileSystemStorage(FileSystemStorage):
+    def __init__(self, *args, **kwargs):
+        print("I AM ALSO BEING CALLED")
+        super().__init__(*args, **kwargs)
+        if not os.path.exists(self.location):
+            os.makedirs(self.location)
 
 
 class Language(models.Model):
@@ -112,7 +130,7 @@ class Game(models.Model):
     description = models.TextField(
         max_length=1000)
 
-    image = models.ImageField(upload_to='game/', blank=True, null=True)
+    image = models.ImageField(upload_to=generate_unique_filename, storage=CustomFileSystemStorage(), blank=True, null=True)
 
     class Meta:
         ordering = ['title', 'platform', 'release_date']

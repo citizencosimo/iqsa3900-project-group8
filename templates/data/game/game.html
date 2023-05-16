@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="card mb-3 shadow gor-card">
-  <div class="card-body" style="padding: 0 0 0 0">
+  <div class="card-body gor-card-body" style="padding: 0 0 0 0">
     <h2 class="card-title text-primary summary-title">{{ game.title }}</h2>
     {% if game.image %}
-      <img class="card-img-top mb-3" src="{{ game.image.url }}" alt="Image">
+        <div class="gor-card-img">
+            <img src="{{ game.image.url }}" alt="Image">
+        </div>
     {% else %}
       <p class="text-muted">No image available</p>
     {% endif %}

@@ -183,7 +183,7 @@ def UpdateGame(request, pk, template_name='data/game/update.html'):
     context = {}
     game = get_object_or_404(Game, pk=pk)
     context['game'] = game
-    form = GameForm(request.POST or None, instance=game)
+    form = GameForm(request.POST or None, request.FILES or None, instance=game)
     context['form'] = form
     if form.is_valid():
         form.save()

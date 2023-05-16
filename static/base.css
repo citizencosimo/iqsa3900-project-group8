@@ -259,4 +259,13 @@ a.login-links {
   padding-right: 5px;
 }
 
+div.gor-card-img img {
+  width: 400px;
+  height: 300px;
+}
+
+div.gor-card-body {
+  padding: 5px 5px 5px 5px;
+}
+
 
