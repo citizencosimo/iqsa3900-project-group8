@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}View All Developers{% endblock %}
 {% block content %}
-<a href="{% url 'add_developer' %}" class="btn mb-3 panel-btn">Add a new developer</a>
+<a href="{% url 'add_developer' %}" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Add Developer</a>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Developer Name</th>
-            <th scope="col">Update</th>
-            <th scope="col">Delete</th>
+            <th scope="col" style="color: white; font-size: larger; font-weight: bold;">Developer Name</th>
+            <th scope="col" style="color: white; font-size: larger; font-weight: bold;">Update</th>
+            <th scope="col" style="color: white; font-size: larger; font-weight: bold;">Delete</th>
         </tr>
     </thead>
     <tbody>
         {% for developer in objects_list %}
         <tr>
-            <td><a href="{{ developer.get_absolute_url }}" class="text-primary">{{ developer.developer_name }}</a></td>
-            <td><a href="{% url 'update_developer' pk=developer.pk %}" class="btn btn-primary">Update</a></td>
-            <td><a href="{% url 'delete_developer' pk=developer.pk %}" class="btn btn-danger">Delete</a></td>
+            <td><a href="{{ developer.get_absolute_url }}" class="text-primary" style="font-size: larger; font-weight: bold;">{{ developer.developer_name }}</a></td>
+            <td><a href="{% url 'update_developer' pk=developer.pk %}" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Update</a></td>
+            <td><a href="{% url 'delete_developer' pk=developer.pk %}" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Delete</a></td>
         </tr>
         {% endfor %}
     </tbody>

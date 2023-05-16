@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}View All Games{% endblock %}
 {% block content %}
-<a href='{% url 'add_game' %}' class="btn mb-3 panel-btn">Add a game</a>
+<a href='{% url 'add_game' %}' class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Add Game</a>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Update</th>
-            <th scope="col">Delete</th>
+            <th scope="col" style="color: white; font-size: larger; font-weight: bold;">Title</th>
+            <th scope="col" style="color: white; font-size: larger; font-weight: bold;">Update</th>
+            <th scope="col" style="color: white; font-size: larger; font-weight: bold;">Delete</th>
         </tr>
     </thead>
     <tbody>
         {% for game in games %}
         <tr>
-            <td><a href="{{ game.get_absolute_url }}" class="text-primary">{{ game.title }}</a></td>
-            <td><a href="{% url 'update_game' pk=game.pk %}" class="btn btn-primary">Update</a></td>
-            <td><a href="{% url 'delete_game' pk=game.pk %}" class="btn btn-danger">Delete</a></td>
+            <td><a href="{{ game.get_absolute_url }}" class="text-primary" style="font-size: larger; font-weight: bold;">{{ game.title }}</a></td>
+            <td><a href="{% url 'update_game' pk=game.pk %}" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Update</a></td>
+            <td><a href="{% url 'delete_game' pk=game.pk %}" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Delete</a></td>
         </tr>
         {% endfor %}
     </tbody>

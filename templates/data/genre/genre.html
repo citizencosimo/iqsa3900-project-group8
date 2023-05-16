@@ -1,5 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="card mb-3 shadow gor-card">
+  <div class="card-body gor-card-body" style="padding: 0 0 0 0">
+    <h2 class="card-title text-primary summary-title" style="font-weight: bold;">{{ genre.name }}</h2>
+    <br>
+    <p class="card-text" style="font-size: larger;"><strong>Description: </strong>{{ genre.description }}</p>
+    <br>
+  </div>
+</div>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
+{% block content %}
 {% block title %}<h1>{{ genre.name }}</h1>{% endblock %}
 <p>Description: {{ genre.description }}</p>
-{% endblock %}
+{% endblock %} {% endcomment %}

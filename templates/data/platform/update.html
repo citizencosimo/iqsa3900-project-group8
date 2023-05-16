@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="card mb-3">
-  <div class="card-header text-white bg-dark">
-    {% block title %}<h2 class="card-title">Edit Platfrom</h2>{% endblock %}
+<div class="card mb-3 shadow">
+  <div class="card-title text-primary summary-title" style="font-size: larger; font-weight: bold;">
+    {% block title %}<h2 class="card-title text-primary summary-title" style="font-weight: bold;">Edit Platform</h2>{% endblock %}
   </div>
   <div class="card-body">
     <form enctype="multipart/form-data" method="post" class="mt-4">
       {% csrf_token %}
       {% for field in form %}
-        <div class="form-group">
+        <div class="form-group " style="font-weight: bold;">
           <label for="{{ field.id_for_label }}">{{ field.label }}</label>
           {{ field }}
           {% if field.help_text %}
@@ -19,7 +19,7 @@
           {% endfor %}
         </div>
       {% endfor %}
-      <button type="submit" class="btn btn-success">Update</button>
+      <button type="submit" class="btn mb-3 panel-btn">Update</button>
     </form>
   </div>
 </div>

@@ -1,4 +1,22 @@
 {% extends 'base.html' %}
+{% block content %}
+<div class="card mb-3 shadow">
+  <div class="card-title text-primary summary-title" style="font-size: larger; font-weight: bold;">
+    <h2 class="card-title text-primary summary-title" style="font-weight: bold;">Confirm Deletion</h2>
+  </div>
+  <div class="card-body">
+    <form method="post" class="mt-4">
+      {% csrf_token %}
+      <div class="alert alert-danger" style="font-weight: bold;" role="alert">
+        Are you sure you want to delete this genre?
+      </div>
+      <button type="submit" class="btn mb-3 panel-btn">Delete</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
 {%  block content %}
 {% block title %}Confirm Deletion{% endblock %}
     <form method="post">
@@ -7,4 +25,4 @@
         Name: {{ genre.name }}
         <input type="submit" value="Delete" />
     </form>
-{% endblock %}
+{% endblock %} {% endcomment %}
