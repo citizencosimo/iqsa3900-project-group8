@@ -26,11 +26,12 @@
         <span class="badge badge-secondary">{{ lang }}</span>
       {% endfor %}
     </p>
+  <br>
   </div>
 </div>
 
 {% if reviews %}
-  <a href={% url 'write_review' game_id=game.pk %} class="btn btn-primary mb-3">Write a Review</a>
+  <a href="{% url 'write_review' game_id=game.pk %}" class="btn mb-3 panel-btn">Write a Review</a>
   {% for r in reviews %}
     <hr>
     <div class="jumbotron gor-card">
@@ -41,9 +42,9 @@
       <h3 class="display-4 review-title">{{ r.description }}</h3>
       <p>{{ r.comment }}</p>
       {% if request.user.username == r.user.username %}
-        <a href="{%  url 'update_review' review_id=r.pk %}" class="btn btn-warning">Edit</a>
+        <button action="{%  url 'update_review' review_id=r.pk %}" class="btn panel-btn">Edit</button>
       {% else %}
-        <a href="{%  url 'report_review' review_id=r.pk %}" class="btn btn-danger">Report</a>
+        <button action="{%  url 'report_review' review_id=r.pk %}" class="btn panel-btn">Report</button>
       {% endif %}
     </div>
   {% endfor %}

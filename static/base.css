@@ -264,8 +264,13 @@ div.gor-card-img img {
   height: 300px;
 }
 
-div.gor-card-body {
-  padding: 5px 5px 5px 5px;
+div.gor-card-body p {
+  margin-left: 10px;
+}
+
+div.gor-card-body strong {
+  color: var(--main-bg-color);
+  font-weight: bolder;
 }
 
 
