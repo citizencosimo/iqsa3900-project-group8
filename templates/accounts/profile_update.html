@@ -4,7 +4,7 @@
   <div class="card-body gor-card-body" style="padding: 0 0 0 0">
     <h2 class="card-title text-primary summary-title">Edit profile</h2>
     <br>
-    <form method="post">
+    <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Save changes</button>

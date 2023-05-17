@@ -1,10 +1,25 @@
+import os
+import uuid
+
+from django.core.files.storage import FileSystemStorage
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+def generate_unique_filename(instance, filename):
+    extension = filename.split('.')[-1]
+    new_filename = f"{uuid.uuid4().hex}.{extension}"
+    return os.path.join('user_images/', new_filename)
+
+class CustomFileSystemStorage(FileSystemStorage):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not os.path.exists(self.location):
+            os.makedirs(self.location)
+
 class CustomUser(AbstractUser):
     pass
-    user_image = models.ImageField(upload_to='user_images/', null=True, blank=True)
+    user_image = models.ImageField(upload_to=generate_unique_filename, storage=CustomFileSystemStorage(), null=True, blank=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     is_onprobation = models.BooleanField(default=False,
