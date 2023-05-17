@@ -1,4 +1,19 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% block content %}
+<div class="card mb-3 shadow gor-card">
+  <div class="card-body gor-card-body" style="padding: 0 0 0 0">
+    <h2 class="card-title text-primary summary-title" style="font-weight: bold;">Sign Up</h2>
+    <form method="post">
+      <br>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Sign Up</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% comment %} {% extends "base.html" %}
 
 {% block title %}Sign Up{% endblock %}
 
@@ -9,4 +24,4 @@
   {{ form.as_p }}
   <button type="submit">Sign Up</button>
 </form>
-{% endblock %}
+{% endblock %} {% endcomment %}

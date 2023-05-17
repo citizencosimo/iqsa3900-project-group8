@@ -2,6 +2,7 @@ from datetime import time, datetime
 
 from django.core.mail import send_mail
 
+from accounts.mixins import StaffRequiredMixin
 from reviewertools.models import Review, ReviewTicket
 from accounts.models import CustomUser
 from django.shortcuts import render, redirect, get_object_or_404
@@ -15,6 +16,9 @@ def ReviewIndexTest(request):
         return render(request, 'review/reviewindex.html', context)
 
 def CreateReview(request, game_id):
+        if not request.user.is_authenticated:
+                messages.error(request, "Please log in to access this page.")
+                return redirect('login')
         context = {}
         game = get_object_or_404(Game, pk=game_id)
         context["game"] = game
@@ -35,6 +39,9 @@ def CreateReview(request, game_id):
 
 
 def UpdateReview(request, review_id):
+        if not request.user.is_authenticated:
+                messages.error(request, "Please log in to access this page.")
+                return redirect('login')
         context = {}
         review = get_object_or_404(Review, pk=review_id)
         if request.user.pk == review.user.pk:
@@ -79,12 +86,18 @@ def ReportReview(request, review_id):
 
 
 def ListOpenTickets(request, template_name='review/process_tickets.html'):
+        result = StaffRequiredMixin().dispatch(request)
+        if not result == None:
+                return result
         context = {}
         flagged_reviews = ReviewTicket.objects.filter(ticket_open=True)
         context["flagged_reviews"] = flagged_reviews
         return render(request, template_name, context)
 
 def ProcessIndividualTicket(request, ticket_id, template_name='review/ticket_view.html'):
+        result = StaffRequiredMixin().dispatch(request)
+        if not result == None:
+                return result
         context = {}
         ticket = get_object_or_404(ReviewTicket, pk=ticket_id)
         user = CustomUser.objects.filter(pk=ticket.moderation_user.pk)[0]

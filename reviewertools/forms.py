@@ -32,7 +32,18 @@ class ReviewForm(ModelForm):
 
     class Meta:
         model=Review
-        fields = ['description', 'comment', 'is_recommended']
+        fields = ['description', 'comment']
+
+        widgets = {
+            'description': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': "Enter the title of your review"
+            }),
+            'comment': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Tell us what you think...'
+            })
+        }
 
 class ReviewTicketForm(ModelForm):
 

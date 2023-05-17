@@ -1,4 +1,39 @@
 {% extends 'base.html' %}
+{% block content %}
+<div class="card mb-3 shadow">
+  <div class="card-title text-primary summary-title" style="font-size: larger; font-weight: bold;">
+    {% block title %}<h2 class="card-title text-primary summary-title" style="font-weight: bold;">Add Game</h2>{% endblock %}
+  </div>
+  <div class="card-body">
+    <form enctype="multipart/form-data" method="post" class="mt-4">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group" style="font-weight: bold;">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}
+            <small id="{{ field.id_for_label }}Help" class="form-text text-muted">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn mb-3 panel-btn">Add</button>
+    </form>
+  </div>
+</div>
+<script>
+    $(document).ready(function() {
+       $('#release_date').datepicker({
+          firstDay: 1,
+          dateFormat: "mm/dd/yy",
+        });
+    });
+</script>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
 {% block title %}Add Game{% endblock %}
 {% block content %}
 
@@ -16,4 +51,4 @@
         });
     });
 </script>
-{% endblock %}
+{% endblock %} {% endcomment %}

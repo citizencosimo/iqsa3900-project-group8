@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-<table class="table table-striped">
+<table class="table table-dark table-striped">
     <thead>
         <tr>
-            <th scope="col">Site</th>
+            <h2 scope="col" style="color: white; font-weight: bold;">Site</h2>
         </tr>
     </thead>
     <tbody>
         {% for site in site_names %}
             <tr>
-                <td><a href="{{ site.0 }}" class="text-primary">{{ site.1 }}</a></td>
+                <td><a href="{{ site.0 }}" class="text-primary" style="font-size: larger; font-weight: bold;">{{ site.1 }}</a></td>
             </tr>
         {% endfor %}
         <tr>
-            <td><a href="{% url 'process_tickets' %}" class="text-primary">Process Open Tickets</a></td>
+            <td><a href="{% url 'process_tickets' %}" class="text-primary" style="font-size: larger; font-weight: bold;">Process Open Tickets</a></td>
         </tr>
         <tr>
-            <td><a href="{% url 'home' %}" class="text-primary">Home</a></td>
+            <td><a href="{% url 'home' %}" class="text-primary" style="font-size: larger; font-weight: bold;">Home</a></td>
         </tr>
     </tbody>
 </table>

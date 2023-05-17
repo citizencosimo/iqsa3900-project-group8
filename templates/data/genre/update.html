@@ -1,4 +1,33 @@
 {% extends 'base.html' %}
+{% block content %}
+<div class="card mb-3 shadow gor-card">
+  <div class="card-body gor-card-body" style="padding: 0 0 0 0">
+    <h2 class="card-title text-primary summary-title" style="font-weight: bold;">Edit Genre</h2>
+  </div>
+  <div class="card-body">
+    <form enctype="multipart/form-data" method="post" class="mt-4">
+      {% csrf_token %}
+      {% for field in form %}
+      <br>
+      <div class="form-text" style="color: black; font-weight: bold; font-size: larger;">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}
+            <small id="{{ field.id_for_label }}Help" class="form-text text-muted">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <div class="invalid-feedback">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <br>
+      <button type="submit" class="btn mb-3 panel-btn">Update</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
 {%  block content %}
 {% block title %}{{ genre.name }}{% endblock %}
     <h1>Edit {{ genre.name }}</h1>
@@ -7,4 +36,4 @@
         <table>{{form.as_table}}</table>
         <button type="submit">Update</button>
     </form>
-{% endblock %}
+{% endblock %} {% endcomment %}

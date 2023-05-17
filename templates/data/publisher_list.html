@@ -1,26 +1,28 @@
 {% extends 'base.html' %}
 {% block title %}View All Publishers{% endblock %}
 {% block content %}
-<a href="{% url 'add_publisher' %}" class="btn mb-3 panel-btn">Add a publisher</a>
 
+<a href="{% url 'add_publisher' %}" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Add Publisher</a>
+
+<div class="container">
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Publisher Name</th>
-            <th scope="col">Update</th>
-            <th scope="col">Delete</th>
+            <th scope="col" style="color: white; font-size: larger; font-weight: bold;">Publisher Name</th>
+            <th scope="col" style="color: white; font-size: larger; font-weight: bold;">Update</th>
+            <th scope="col" style="color: white; font-size: larger; font-weight: bold;">Delete</th>
         </tr>
     </thead>
     <tbody>
         {% for publisher in objects_list %}
         <tr>
-            <td><a href="{{ publisher.get_absolute_url }}" class="text-primary">{{ publisher.publisher_name }}</a></td>
-            <td><a href="{% url 'update_publisher' pk=publisher.pk %}" class="btn btn-primary">Update</a></td>
-            <td><a href="{% url 'delete_publisher' pk=publisher.pk %}" class="btn btn-danger">Delete</a></td>
+            <td><a href="{{ publisher.get_absolute_url }}" class="text-primary" style="font-size: larger; font-weight: bold;">{{ publisher.publisher_name }}</a></td>
+            <td><a href="{% url 'update_publisher' pk=publisher.pk %}" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Update</a></td>
+            <td><a href="{% url 'delete_publisher' pk=publisher.pk %}" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Delete</a></td>
         </tr>
         {% endfor %}
     </tbody>
-</table>
+</table></div>
 {% endblock %}
 
 {% comment %} {% extends 'base.html' %}
