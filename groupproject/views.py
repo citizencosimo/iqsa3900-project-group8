@@ -12,8 +12,10 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 def DatabaseLinks(request):
-    mixin = StaffRequiredMixin()
 
+    result = StaffRequiredMixin().dispatch(request)
+    if not request is None:
+        return result
 
     context = {
         'site_names': [('games', 'Game List'),

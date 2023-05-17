@@ -5,5 +5,5 @@ class StaffRequiredMixin:
     def dispatch(self, request):
         print(request.user.is_staff)
         if not request.user.is_staff:
-            redirect('home')
-        return True
+            return redirect('home')
+        return None
