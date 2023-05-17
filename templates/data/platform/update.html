@@ -8,7 +8,8 @@
     <form enctype="multipart/form-data" method="post" class="mt-4">
       {% csrf_token %}
       {% for field in form %}
-        <div class="form-group " style="font-weight: bold;">
+      <br>
+      <div class="form-text" style="color: black; font-weight: bold; font-size: larger;">
           <label for="{{ field.id_for_label }}">{{ field.label }}</label>
           {{ field }}
           {% if field.help_text %}
@@ -19,6 +20,7 @@
           {% endfor %}
         </div>
       {% endfor %}
+      <br>
       <button type="submit" class="btn mb-3 panel-btn">Update</button>
     </form>
   </div>

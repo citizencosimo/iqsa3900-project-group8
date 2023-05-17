@@ -1,6 +1,32 @@
 {%  extends 'base.html' %}
 {% block content %}
 
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <h2 scope="col" style="color: white; font-weight: bold;">Tickets</h2>
+            </tr>
+        </thead>
+            <tbody>
+                {% for r in flagged_reviews %}
+                    <tr>
+                        <td style="font-size: larger; font-weight: bold;">[{{ r.reason }}]</td>
+                        <td style="font-size: larger; font-weight: bold;">{{ r.moderation_user.username }}</td>
+                        <td><a href="{% url 'resolve_ticket' ticket_id=r.pk %}" class="text-primary" style="font-size: larger; font-weight: bold;">Resolve Ticket</a></td>
+                        <td style="font-size: larger; font-weight: bold;">{{ r.id }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td><a href="{% url 'home' %}" class="text-primary" style="font-size: larger; font-weight: bold;">Home</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+{% endblock %}
+
+{% comment %} {%  extends 'base.html' %}
+{% block content %}
+
         <table class="table">
         <thead>
             <tr>
@@ -20,4 +46,4 @@
             {% endfor %}
         </table>
 
-{% endblock %}
+{% endblock %} {% endcomment %}
