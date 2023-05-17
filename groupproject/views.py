@@ -13,9 +13,9 @@ from django.contrib import messages
 
 def DatabaseLinks(request):
 
-    # result = StaffRequiredMixin().dispatch(request)
-    # if not request == None:
-    #     return result
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
 
     context = {
         'site_names': [('games', 'Game List'),
@@ -33,6 +33,9 @@ def DatabaseLinks(request):
 
 
 def CreatePublisher(request):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     form = PublisherForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -44,6 +47,9 @@ def CreatePublisher(request):
 
 
 def CreateDeveloper(request):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     form = DeveloperForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -55,6 +61,9 @@ def CreateDeveloper(request):
 
 
 def CreatePlatform(request):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     form = PlatformForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -66,6 +75,9 @@ def CreatePlatform(request):
 
 
 def CreateGenre(request):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     form = GenreForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -77,6 +89,9 @@ def CreateGenre(request):
 
 
 def CreateLanguage(request):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     form = LanguageForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -103,6 +118,9 @@ def ViewGenre(request, pk, template_name='data/genre/genre.html'):
     return render(request, template_name, context)
 
 def UpdateGenre(request, pk, template_name='data/genre/update.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     genre = get_object_or_404(Genre, pk=pk)
     context['genre'] = genre
@@ -132,6 +150,9 @@ def ViewLanguage(request, pk, template_name='data/language/language.html'):
 
 
 def UpdateLanguage(request, pk, template_name='data/language/update.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     language = get_object_or_404(Language, pk=pk)
     context['language'] = language
@@ -144,6 +165,9 @@ def UpdateLanguage(request, pk, template_name='data/language/update.html'):
     return render(request, template_name, context)
 
 def DeleteLanguage(request, pk, template_name='data/language/delete.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     obj = get_object_or_404(Language, pk=pk)
     context['language'] = obj
@@ -154,6 +178,9 @@ def DeleteLanguage(request, pk, template_name='data/language/delete.html'):
     return render(request, template_name, context)
 
 def CreateGame(request):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     form = GameForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -176,6 +203,9 @@ def ViewGame(request, pk, template_name='data/game/game.html'):
     return render(request, template_name, context)
 
 def DeleteGenre(request, pk, template_name='data/genre/delete.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     obj = get_object_or_404(Genre, pk=pk)
     context['genre'] = obj
@@ -186,6 +216,9 @@ def DeleteGenre(request, pk, template_name='data/genre/delete.html'):
     return render(request, template_name, context)
 
 def UpdateGame(request, pk, template_name='data/game/update.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     game = get_object_or_404(Game, pk=pk)
     context['game'] = game
@@ -199,6 +232,9 @@ def UpdateGame(request, pk, template_name='data/game/update.html'):
 
 
 def DeleteGame(request, pk, template_name='data/game/delete.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     obj = get_object_or_404(Game, pk=pk)
     context['game'] = obj
@@ -231,6 +267,9 @@ def ViewPublisher(request, pk, template_name='data/publisher/publisher.html'):
 
 
 def UpdatePublisher(request, pk, template_name='data/publisher/update.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     publisher = get_object_or_404(Publisher, pk=pk)
     context['publisher'] = publisher
@@ -245,6 +284,9 @@ def UpdatePublisher(request, pk, template_name='data/publisher/update.html'):
 
 
 def DeletePublisher(request, pk, template_name='data/publisher/delete.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     obj = get_object_or_404(Publisher, pk=pk)
     context['publisher'] = obj
@@ -263,6 +305,9 @@ def ViewDeveloper(request, pk, template_name='data/developer/developer.html'):
 
 
 def UpdateDeveloper(request, pk, template_name='data/developer/update.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     developer = get_object_or_404(Developer, pk=pk)
     context['developer'] = developer
@@ -276,6 +321,9 @@ def UpdateDeveloper(request, pk, template_name='data/developer/update.html'):
 
 
 def DeleteDeveloper(request, pk, template_name='data/developer/delete.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     obj = get_object_or_404(Developer, pk=pk)
     context['developer'] = obj
@@ -301,6 +349,9 @@ def ViewPlatform(request, pk, template_name='data/platform/platform.html'):
 
 
 def UpdatePlatform(request, pk, template_name='data/platform/update.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     platform = get_object_or_404(Platform, pk=pk)
     context['developer'] = platform
@@ -314,6 +365,9 @@ def UpdatePlatform(request, pk, template_name='data/platform/update.html'):
 
 
 def DeletePlatform(request, pk, template_name='data/platform/delete.html'):
+    result = StaffRequiredMixin().dispatch(request)
+    if not result == None:
+        return result
     context = {}
     obj = get_object_or_404(Platform, pk=pk)
     context['developer'] = obj
