@@ -50,7 +50,7 @@ class Genre(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('genre_view', args=str(self.pk))
+        return reverse('genre_view', args=[str(self.pk)])
 
 
 class Publisher(models.Model):
@@ -62,8 +62,9 @@ class Publisher(models.Model):
 
     def __str__(self):
         return self.publisher_name
+    
     def get_absolute_url(self):
-        return reverse('publisher_view', args=str(self.pk))
+        return reverse('publisher_view', args=[str(self.pk)])
 
 
 class Developer(models.Model):
@@ -90,7 +91,7 @@ class Platform(models.Model):
     def __str__(self):
         return self.platform_name
     def get_absolute_url(self):
-        return reverse('platform_view', args=str(self.pk))
+        return reverse('platform_view', args=[str(self.pk)])
 
 class Game(models.Model):
     title = models.CharField(max_length=100)
