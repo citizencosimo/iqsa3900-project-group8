@@ -140,7 +140,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR/"static",
 ]
-# STATIC_ROOT = BASE_DIR/"local-cdn"/"static"
+STATIC_ROOT = BASE_DIR/"local-cdn"/"static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -159,13 +159,13 @@ MEDIA_URL = '/media/'
 # Password reset via email
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = str(os.getenv('EMAIL_ADMIN'))
-EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_PASSWORD'))
+EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_PASS'))
 
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 SERVER_EMAIL = 'root@gmail.com'
 
-DEFAULT_FROM_EMAIL='gamesonreviewgore@gmail.com'
+DEFAULT_FROM_EMAIL = str(os.getenv('EMAIL_ADMIN'))
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 

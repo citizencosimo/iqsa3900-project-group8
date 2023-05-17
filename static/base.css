@@ -4,12 +4,13 @@
   --accent-1: #FF3374;
   --accent-2: #a9b4c2;
   --accent-3: #fdfffc;
+  --t-accent-1: rgba(255, 51, 116, 0.3);
   --t-accent-2: rgba(169, 180, 194, 0.6);
 }
 
 body {
   background-color: var(--main-header-color);
-  background: url('../static/site-images/bg.jpg');
+  background: url('site-images/bg.jpg');
   background-attachment: scroll;
   background-size: cover;
   background-attachment: fixed;
@@ -271,6 +272,19 @@ div.gor-card-body p {
 div.gor-card-body strong {
   color: var(--main-bg-color);
   font-weight: bolder;
+}
+
+div.gor-form-field input, div.gor-form-field textarea{
+  margin-top: 15px;
+  background: var(--t-accent-2);
+}
+
+div.gor-form-field input::placeholder, div.gor-form-field textarea::placeholder{
+  color: var(--main-bg-color);
+}
+
+div.gor-form-field input:focus, div.gor-form-field textarea:focus {
+  background: var(--accent-2);
 }
 
 

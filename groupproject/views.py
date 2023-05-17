@@ -229,11 +229,12 @@ def UpdatePublisher(request, pk, template_name='data/publisher/update.html'):
     publisher = get_object_or_404(Publisher, pk=pk)
     context['publisher'] = publisher
     form = PublisherForm(request.POST or None, instance=publisher)
-    context['form'] = form
+
     if form.is_valid():
         form.save()
         messages.success(request, 'Successfully Updated')
         return redirect('publisher_list')
+    context['form'] = form
     return render(request, template_name, context)
 
 
@@ -257,14 +258,14 @@ def ViewDeveloper(request, pk, template_name='data/developer/developer.html'):
 
 def UpdateDeveloper(request, pk, template_name='data/developer/update.html'):
     context = {}
-    developer = get_object_or_404(Publisher, pk=pk)
+    developer = get_object_or_404(Developer, pk=pk)
     context['developer'] = developer
-    form = DeveloperForm(request.POST or None, instance=developer)
-    context['form'] = form
+    form = DeveloperForm(request.POST, instance=developer)
     if form.is_valid():
         form.save()
         messages.success(request, 'Successfully Updated')
         return redirect('developer_list')
+    context['form'] = form
     return render(request, template_name, context)
 
 
