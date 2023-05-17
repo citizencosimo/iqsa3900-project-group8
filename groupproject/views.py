@@ -13,9 +13,9 @@ from django.contrib import messages
 
 def DatabaseLinks(request):
 
-    result = StaffRequiredMixin().dispatch(request)
-    if not request is None:
-        return result
+    # result = StaffRequiredMixin().dispatch(request)
+    # if not request == None:
+    #     return result
 
     context = {
         'site_names': [('games', 'Game List'),
