@@ -5,6 +5,9 @@ from django.core.files.storage import FileSystemStorage
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
 
 def generate_unique_filename(instance, filename):
     extension = filename.split('.')[-1]
@@ -31,3 +34,13 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+@receiver(pre_save, sender=CustomUser)
+def deleteOldImage(sender, instance, **kwargs):
+    if instance.pk:
+        try:
+            old_instance = CustomUser.objects.get(pk=instance.pk)
+            if old_instance.user_image and instance.user_image != old_instance.user_image:
+                old_instance.user_image.delete(save=False)
+        except CustomUser.DoesNotExist:
+            pass
