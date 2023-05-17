@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2 class="summary-title" style="font-weight: bold;">Log In</h2>
-    <form method="post">
-      <br>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Log In</button>
-    </form>
-    <p class="card-text" style="font-size: larger;"><a href="{% url 'password_reset' %}" class="text-primary">Forgot password?</a></p>
-  </div>
-</div>
+    <div class="card mb-3 shadow gor-card">
+        <div class="card-body gor-card-body" style="padding: 0 0 0 0">
+            <h2 class="summary-title" style="font-weight: bold;">Log In</h2>
+            <form method="post" class="mt-4">
+            <br>
+            {% csrf_token %}
+            {{ form.as_p }}
+                <button type="submit" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Log In</button>
+            </form>
+            <p class="card-text" style="font-size: larger;"><a class="login-links" href="{% url 'password_reset' %}" class="text-primary">Forgot password?</a></p>
+            <br>
+        </div>
+    </div>
 {% endblock %}
 
 {% comment %} {% extends "base.html" %}
