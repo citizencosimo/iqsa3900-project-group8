@@ -14,7 +14,7 @@
     <tbody>
         {% for game in games %}
         <tr>
-            <td><a href="{{ game.get_absolute_url }}" class="text-primary" style="font-size: larger; font-weight: bold;">{{ game.title }}</a></td>
+            <td><a href="{% url 'game_view' pk=game.pk %}" class="text-primary" style="font-size: larger; font-weight: bold;">{{ game.title }}</a></td>
             <td><a href="{% url 'update_game' pk=game.pk %}" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Update</a></td>
             <td><a href="{% url 'delete_game' pk=game.pk %}" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Delete</a></td>
         </tr>

@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
+
+from accounts.mixins import StaffRequiredMixin
 from reviewertools.models import Review
 from .forms import PublisherForm, GameForm, DeveloperForm, GenreForm, PlatformForm, LanguageForm, ImageForm
 from django.views.generic import ListView, DetailView
@@ -9,8 +11,10 @@ from groupproject.models import Game, Publisher, Developer, Platform, Genre, Lan
 from django.urls import reverse_lazy
 from django.contrib import messages
 
-
 def DatabaseLinks(request):
+    mixin = StaffRequiredMixin()
+
+
     context = {
         'site_names': [('games', 'Game List'),
                        ('developers', 'Developer List'),
