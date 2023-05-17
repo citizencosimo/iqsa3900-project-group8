@@ -239,7 +239,7 @@ def UpdatePublisher(request, pk, template_name='data/publisher/update.html'):
 
 def DeletePublisher(request, pk, template_name='data/publisher/delete.html'):
     context = {}
-    obj = get_object_or_404(Publisher, pk)
+    obj = get_object_or_404(Publisher, pk=pk)
     context['publisher'] = obj
     if request.method == "POST":
         obj.delete()
