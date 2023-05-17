@@ -1,5 +1,39 @@
 {%  extends 'base.html' %}
 {% block content %}
+<div class="mb-3 shadow">
+    <div class="card-body" style="padding: 0 0 0 0">
+        {% block title %}<h2 class="card-title text-primary summary-title" style="font-weight: bold;">Report Review</h2>{% endblock %}
+        <div class="jumbotron gor-card">
+            <p class="lead"><em>{{ review.user.username }} writes...</em></p>
+            <h3 class="display-4">{{ review.description }}</h3>
+            <p>{{ review.comment }}</p>
+        </div>
+    </div>
+</div>
+<div class="gor-card mb-3 shadow">
+    <div class="card-body">
+        <form enctype="form-data" class="form-group mt-4" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group" style="font-weight: bold;">
+                    <label for="{{ field.id_for_label }}" style="font-weight: bold; color: white;">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small id="{{ field.id_for_label }}Help" style="font-weight: bold;">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn mb-3 panel-btn" style="color: white; font-weight: bold;">Report</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% comment %} {%  extends 'base.html' %}
+{% block content %}
     {% block title %}Report Review{% endblock %}
     <div class="jumbotron gor-card">
         <p class="lead"><em>{{ review.user.username }} writes...</em></p>
@@ -12,4 +46,4 @@
         <table>{{form.as_table}}</table>
         <button type="submit">Report</button>
     </form>
-{% endblock %}
+{% endblock %} {% endcomment %}
